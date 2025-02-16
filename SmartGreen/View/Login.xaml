@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartGreen.View.Login" 
+             NavigationPage.HasNavigationBar="False"
+             Shell.NavBarIsVisible="False"
+             BackgroundImageSource="hum.jpg"
+             Shell.FlyoutBehavior="Disabled" Opacity=".9"
+             Shell.FlyoutItemIsVisible="False">
+<VerticalStackLayout>
+    <Grid RowDefinitions="Auto, Auto, Auto, *">
+        <!-- Fondo blanco redondeado -->
+        <Grid Grid.Row="0">
+            <RoundRectangle Margin="15,80,15,-700"
+                            CornerRadius="30,30,30,30"
+                            Fill="White"
+                            Opacity=".7"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Image Source="logooff.png" Scale=".8" Margin="0,80,0,100"/>
+            <Label FontAttributes="Bold" FontFamily="bold"
+                   FontSize="28"
+                   Text="Iniciar sesión" VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   TextColor="#508029" Margin="0,190,0,0"/>
+                <Label Text="Ingresa con tus datos para continuar." FontFamily="bold" 
+                       FontSize="17" Margin="0,315,0,0"
+                       HorizontalOptions="Center" TextColor="#777965"/>
+            </Grid>
+
+        <!-- Campos de entrada -->
+        <Grid Grid.Row="2" Margin="30,-30,30,10">
+            <Entry Placeholder="Correo" HeightRequest="40" FontSize="18" TextColor="Black" />
+        </Grid>
+
+        <Grid Grid.Row="3" Margin="30,0,30,150">
+            <Entry Placeholder="Contraseña" IsPassword="True" HeightRequest="40" FontSize="18" TextColor="Black" />
+        </Grid>
+
+        <!-- Botones -->
+        <Grid Grid.Row="4" Margin="100,-25,100,0">
+                <Button Text="Iniciar sesión" BackgroundColor="#508029" TextColor="White" HeightRequest="40"
+                    Command="{Binding ToMenu}"
+                    CornerRadius="25" HorizontalOptions="FillAndExpand" FontSize="16" FontAttributes="Bold" />
+        </Grid>
+
+        <Grid Grid.Row="5" Margin="100,90,100,0">
+                <Button Text="Crear una cuenta" BackgroundColor="#777965" TextColor="White" HeightRequest="40"
+                    CornerRadius="25" HorizontalOptions="FillAndExpand" FontSize="16" FontAttributes="Bold" />
+        </Grid>
+
+        <Grid Grid.Row="6">
+            <Label Text="¿Olvidaste tu contraseña?" TextColor="Black" FontSize="12"
+                   HorizontalOptions="Center" TextDecorations="Underline" Margin="0,180,0,0">
+            </Label>
+        </Grid>
+    </Grid>
+</VerticalStackLayout>
+
+</ContentPage>

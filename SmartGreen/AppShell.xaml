@@ -4,12 +4,32 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:SmartGreen"
-    Shell.FlyoutBehavior="Disabled"
-    Title="SmartGreen">
+    xmlns:view="clr-namespace:SmartGreen.View"
+    Shell.FlyoutBehavior="Flyout" 
+    NavigationPage.HasNavigationBar="True"
+    Shell.FlyoutItemIsVisible="True"
+    Shell.NavBarIsVisible="True"  
+    Title="SmartGreen"
+    >
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <Shell.FlyoutHeader>
+        <StackLayout Padding="10" BackgroundColor="#b2b0a8" >
+            <Label Text="Bienvenido a SmartGreen" FontSize="24"/>
+        </StackLayout>
+    </Shell.FlyoutHeader>
+    
+    <ShellItem Route="View" IsVisible="True" IsEnabled="True">
+        <ShellContent ContentTemplate="{DataTemplate view:Login}"/>
+    </ShellItem>
+
+    <ShellContent Title="Inicio" Icon="home.png"/>
+    <ShellContent Title="Registrar invernadero" Icon="add.png"/>
+    <ShellContent Title="Notificaciones" Icon="notify.png"/>
+    <ShellContent Title="Estadísticas" Icon="grafico.png"/>
+
+    
+    <ShellContent Title="Cuenta" Icon="cuenta.png"/>
+    <ShellContent Title="Salir" Icon="salida.png" />
 
 </Shell>
+
