@@ -9,6 +9,7 @@ namespace SmartGreen
             InitializeComponent();
             Routing.RegisterRoute("LoginPage", typeof(Login));
             Routing.RegisterRoute("MenuView", typeof(MenuView));
+            Routing.RegisterRoute("MenuInvernaderos", typeof(MenuInvernaderos));
 
         }
     }

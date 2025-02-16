@@ -18,7 +18,7 @@ namespace SmartGreen.ViewModel
 
         public async Task GoTo()
         {
-            await Shell.Current.GoToAsync($"/{nameof(MenuView)}");
+            await Shell.Current.GoToAsync($"/{nameof(MenuInvernaderos)}");
         }
         //Comandos
         public ICommand ToMenu => new Command (async() => await GoTo());
