@@ -18,7 +18,7 @@
         </StackLayout>
     </Shell.FlyoutHeader>
     
-    <ShellItem Route="View" IsVisible="True" IsEnabled="True">
+    <ShellItem Route="Login" IsVisible="True" IsEnabled="True">
         <ShellContent ContentTemplate="{DataTemplate view:Login}"/>
     </ShellItem>
 

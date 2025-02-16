@@ -2,26 +2,26 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartGreen.View.Register" BackgroundImageSource="hum.jpg" Opacity=".9"
-             Title="Register">
+             Shell.FlyoutBehavior="Disabled" Shell.NavBarIsVisible="False">
     <VerticalStackLayout>
         <Grid RowDefinitions="Auto, Auto, Auto, *">
             <!-- Fondo blanco redondeado -->
             <Grid Grid.Row="0">
-                <RoundRectangle Margin="15,100,15,-760"
+                <RoundRectangle Margin="15,60,15,-750"
                             CornerRadius="30,30,30,30"
                             Fill="White"
                             Opacity=".7"/>
             </Grid>
 
             <Grid Grid.Row="1">
-                <Image Source="logooff.png" Scale=".8" Margin="0,80,0,110"/>
+                <Image Source="logooff.png" Scale=".8" Margin="0,50,0,110"/>
                 <Label FontAttributes="Bold" FontFamily="bold"
                    FontSize="28"
                    Text="Crear una nueva cuenta" VerticalOptions="Center"
                    HorizontalOptions="Center"
-                   TextColor="#508029" Margin="0,170,0,10"/>
+                   TextColor="#508029" Margin="0,150,0,10"/>
                 <Label Text="Ingrese sus datos en los siguientes campos para continuar." FontFamily="bold" 
-                       FontSize="16" Margin="30,305,30,0"
+                       FontSize="16" Margin="30,275,30,0"
                        HorizontalOptions="Center" TextColor="#777965"/>
             </Grid>
 
@@ -30,26 +30,27 @@
                 <Entry Placeholder="Nombre" HeightRequest="40" FontSize="18" TextColor="Black" PlaceholderColor="Gray"/>
             </Grid>
 
-            <Grid Grid.Row="3" Margin="30,-230,30,0">
+            <Grid Grid.Row="3" Margin="30,-270,30,0">
                 <Entry Placeholder="Correo" HeightRequest="40" FontSize="18" TextColor="Black" Keyboard="Email" PlaceholderColor="Gray"/>
             </Grid>
-            <Grid Grid.Row="4" Margin="30,-140,30,0">
+            <Grid Grid.Row="4" Margin="30,-150,30,0">
                 <Entry Placeholder="Celular" HeightRequest="40" FontSize="18" TextColor="Black" Keyboard="Numeric" PlaceholderColor="Gray"/>
             </Grid>
-            <Grid Grid.Row="5" Margin="30,-50,30,0">
+            <Grid Grid.Row="5" Margin="30,-30,30,0">
                 <Entry Placeholder="Contraseña" IsPassword="True" HeightRequest="40" FontSize="18" TextColor="Black" PlaceholderColor="Gray"/>
             </Grid>
-            <Grid Grid.Row="6" Margin="30,40,30,0">
+            <Grid Grid.Row="6" Margin="30,90,30,0">
                 <Entry Placeholder="Confirmar contraseña" IsPassword="True" HeightRequest="40" FontSize="18" TextColor="Black" PlaceholderColor="Gray"/>
             </Grid>
 
             <!-- Botones -->
-            <Grid Grid.Row="7" Margin="100,140,100,0">
+            <Grid Grid.Row="7" Margin="100,200,100,0">
                 <Button Text="Registrarse" BackgroundColor="#508029" TextColor="White" HeightRequest="42"
                  CornerRadius="25" HorizontalOptions="FillAndExpand" FontSize="16" FontAttributes="Bold" />
             </Grid>
-            <Grid Grid.Row="8" Margin="100,240,100,0">
+            <Grid Grid.Row="8" Margin="100,300,100,0">
                 <Button Text="Cancelar" BackgroundColor="#b2b0a8" TextColor="White" HeightRequest="42"
+                        Command="{Binding ReturnToLogin}"
            CornerRadius="25" HorizontalOptions="FillAndExpand" FontSize="16" FontAttributes="Bold"/>
             </Grid>
 

@@ -1,4 +1,5 @@
 ﻿using SmartGreen.View;
+using SmartGreen.View.RecoveryPass;
 using SmartGreen.View.ViveroView;
 namespace SmartGreen
 {
@@ -7,8 +8,11 @@ namespace SmartGreen
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute("LoginPage", typeof(Login));
+            Routing.RegisterRoute("Login", typeof(Login));
             Routing.RegisterRoute("MenuView", typeof(MenuView));
+            Routing.RegisterRoute("Register", typeof(Register));
+            Routing.RegisterRoute("Recovery1", typeof (Recovery1));
+            Routing.RegisterRoute("Recovery2", typeof(Recovery2));
 
         }
     }
