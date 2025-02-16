@@ -9,7 +9,7 @@ namespace SmartGreen
         {
             InitializeComponent();
 
-            MainPage = new Recovery2();
+            MainPage = new AppShell();
         }
     }
 }
