@@ -65,6 +65,9 @@
 	  <MauiXaml Update="View\Login.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="View\RecoveryPass\Recovery1.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\ViveroView\MenuView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
