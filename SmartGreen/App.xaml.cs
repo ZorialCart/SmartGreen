@@ -1,4 +1,7 @@
-﻿namespace SmartGreen
+﻿using SmartGreen.View;
+using SmartGreen.View.RecoveryPass;
+
+namespace SmartGreen
 {
     public partial class App : Application
     {
@@ -6,7 +9,7 @@
         {
             InitializeComponent();
 
-            MainPage = new AppShell();
+            MainPage = new Recovery2();
         }
     }
 }

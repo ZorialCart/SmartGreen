@@ -31,11 +31,11 @@
 
         <!-- Campos de entrada -->
         <Grid Grid.Row="2" Margin="30,-30,30,10">
-            <Entry Placeholder="Correo" HeightRequest="40" FontSize="18" TextColor="Black" />
+            <Entry Placeholder="Correo" HeightRequest="40" FontSize="18" TextColor="Black" PlaceholderColor="Gray" Keyboard="Email"/>
         </Grid>
 
         <Grid Grid.Row="3" Margin="30,0,30,150">
-            <Entry Placeholder="Contraseña" IsPassword="True" HeightRequest="40" FontSize="18" TextColor="Black" />
+            <Entry Placeholder="Contraseña" IsPassword="True" HeightRequest="40" FontSize="18" TextColor="Black" PlaceholderColor="Gray" />
         </Grid>
 
         <!-- Botones -->
