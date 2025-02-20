@@ -8,7 +8,6 @@ namespace SmartGreen
         public App()
         {
             InitializeComponent();
-
             MainPage = new AppShell();
         }
     }

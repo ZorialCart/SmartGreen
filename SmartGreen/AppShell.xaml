@@ -17,12 +17,11 @@
             <Label Text="Bienvenido a SmartGreen" FontSize="24"/>
         </StackLayout>
     </Shell.FlyoutHeader>
-    
-    <ShellItem Route="Login" IsVisible="True" IsEnabled="True">
+
+    <ShellItem Title="Inicio" Route="Login" IsVisible="True" IsEnabled="True"  Icon="home.png">
         <ShellContent ContentTemplate="{DataTemplate view:Login}"/>
     </ShellItem>
 
-    <ShellContent Title="Inicio" Icon="home.png"/>
     <ShellContent Title="Registrar invernadero" Icon="add.png"/>
     <ShellContent Title="Notificaciones" Icon="notify.png"/>
     <ShellContent Title="Estadísticas" Icon="grafico.png"/>

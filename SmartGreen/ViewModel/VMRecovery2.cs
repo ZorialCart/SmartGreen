@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace SmartGreen.ViewModel
 {
-    class VMRecovery2
+    internal class VMRecovery2
     {
+        public VMRecovery2() { }
+
+
     }
 }
