@@ -136,7 +136,40 @@ namespace SmartGreen.ViewModel
 
         #endregion
 
-        public void Validate()
+        public async Task<bool>FindByEmail(string correo)
+        {
+            using (var cliente = new HttpClient())
+            {
+                try
+
+                {
+                    string url = $"https://934vm7pw-5062.usw3.devtunnels.ms/api/User/Correo?correo={correo}";
+
+                    var respuesta = await cliente.GetAsync(url);
+
+                    if (respuesta.IsSuccessStatusCode)
+                    {
+                        string responseContent = await respuesta.Content.ReadAsStringAsync();
+                        return !string.IsNullOrEmpty(responseContent); // Respuesta para cuando el correo existe
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Error en la respuesta: {respuesta.StatusCode}");
+                        return false; // Respuesta por si el correo no esta registrado
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error al hacer la solicitud: {ex.Message}");
+                    return false;
+                }
+
+            }
+                
+        }
+
+        public async void Validate()
         {
             MsgNombre = string.Empty;
             MsgCelular = string.Empty;
@@ -157,6 +190,16 @@ namespace SmartGreen.ViewModel
                 MsgEmail = "El correo electrónico es inválido.";
                 isValid = false;
             }
+
+            bool resp = await FindByEmail(Correo);
+
+            if (!resp)
+            {
+                MsgEmail = "El correo ya existe.";
+                isValid = false;
+            }
+                
+       
 
             if (string.IsNullOrWhiteSpace(Celular) || !Celular.All(char.IsDigit) || Celular.Length != 10)
             {
@@ -194,7 +237,6 @@ namespace SmartGreen.ViewModel
 
         }
 
-
         public async Task Register(UserModel userModel)
         {
             Validate();
@@ -202,10 +244,10 @@ namespace SmartGreen.ViewModel
             if (!Sumit) return;
 
             userModel.Id = "";
-            userModel.Nombre = Nombre;
-            userModel.Correo = Correo;
-            userModel.Celular = Celular;
-            userModel.Password = Password;
+            userModel.Nombre = Nombre.Trim();
+            userModel.Correo = Correo.Trim();
+            userModel.Celular = Celular.Trim();
+            userModel.Password = Password.Trim();
             userModel.UsuarioTipo = "user";
 
             using (var cliente = new HttpClient())
@@ -214,7 +256,7 @@ namespace SmartGreen.ViewModel
                 {
                     string json = JsonSerializer.Serialize(userModel);
                     var content = new StringContent(json, Encoding.UTF8, "application/json");
-                    var respuesta = await cliente.PostAsync("http://localhost:7068/api/User/Register", content); 
+                    var respuesta = await cliente.PostAsync("https://934vm7pw-5062.usw3.devtunnels.ms/api/User/Register", content); 
 
                     if (respuesta.IsSuccessStatusCode)
                     {
