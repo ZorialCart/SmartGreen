@@ -11,7 +11,4 @@ public partial class Register : ContentPage
 
         BindingContext = vmRegister;
     }
-
-
-
 }

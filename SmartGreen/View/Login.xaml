@@ -30,13 +30,15 @@
             </Grid>
 
         <!-- Campos de entrada -->
-        <Grid Grid.Row="2" Margin="30,-30,30,10">
-            <Entry Placeholder="Correo" HeightRequest="40" FontSize="18" TextColor="Black" PlaceholderColor="Gray" Keyboard="Email"/>
-        </Grid>
+        <Grid Grid.Row="2" Margin="30,-50,30,10">
+            <Entry Text="{Binding Username}" Placeholder="Correo" HeightRequest="40" FontSize="18" TextColor="Black" PlaceholderColor="Gray" Keyboard="Email"/>
+                <Label Text="{Binding MsgUser}" Margin="0,40,0,0"  TextColor="Red"/>
+            </Grid>
 
-        <Grid Grid.Row="3" Margin="30,0,30,150">
-            <Entry Placeholder="Contraseña" IsPassword="True" HeightRequest="40" FontSize="18" TextColor="Black" PlaceholderColor="Gray" />
-        </Grid>
+        <Grid Grid.Row="3" Margin="30,-20,30,150">
+            <Entry Text="{Binding Password}" Placeholder="Contraseña" IsPassword="True" HeightRequest="40" FontSize="18" TextColor="Black" PlaceholderColor="Gray" />
+                <Label Text="{Binding MsgPass}" Margin="0,50,0,0"  TextColor="Red"/>
+            </Grid>
 
         <!-- Botones -->
         <Grid Grid.Row="4" Margin="100,-25,100,0">

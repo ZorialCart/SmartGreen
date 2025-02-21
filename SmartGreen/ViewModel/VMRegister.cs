@@ -184,22 +184,20 @@ namespace SmartGreen.ViewModel
                 MsgNombre = "El campo no debe estar vacío.";
                 isValid = false;
             }
-
+            bool resp = await FindByEmail(Correo);
             if (string.IsNullOrWhiteSpace(Correo) || !Correo.Contains("@"))
             {
                 MsgEmail = "El correo electrónico es inválido.";
                 isValid = false;
             }
-
-            bool resp = await FindByEmail(Correo);
-
-            if (!resp)
+            else
             {
-                MsgEmail = "El correo ya existe.";
-                isValid = false;
+                if (!resp)
+                {
+                    MsgEmail = "El correo ya existe, intente nuevamente.";
+                    isValid = false;
+                }
             }
-                
-       
 
             if (string.IsNullOrWhiteSpace(Celular) || !Celular.All(char.IsDigit) || Celular.Length != 10)
             {
