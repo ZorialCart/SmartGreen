@@ -10,12 +10,16 @@ using SmartGreen.Model;
 using SmartGreen.View;
 using SmartGreen.View.RecoveryPass;
 using SmartGreen.View.ViveroView;
+using Newtonsoft.Json;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace SmartGreen.ViewModel
 {
     internal class VMLogin : BaseViewModel
     {
-        public VMLogin() { 
+        public VMLogin()
+        {
         }
 
         #region VARIABLES
@@ -86,139 +90,100 @@ namespace SmartGreen.ViewModel
 
         #endregion
 
-        public enum EmailValidationResult
-        {
-            Success,       // El correo existe
-            NotFound,      // El correo no existe
-            ServerError,   // Error en el servidor
-            InvalidRequest // El correo tiene un formato inválido
-        }
+        #region METHODS
+        //public async Task<bool> FindByEmail(string correo)
+        //{
+        //    using (var cliente = new HttpClient())
+        //    {
+        //        try
 
-        public async Task<EmailValidationResult> FindByEmail(string correo)
-        {
+        //        {
+        //            string url = $"
 
-            using (var cliente = new HttpClient())
-            {
-                try
+        //            var respuesta = await cliente.GetAsync(url);
 
-                {
-                    string url = $"https://934vm7pw-5062.usw3.devtunnels.ms/api/User/Correo?correo={correo}";
+        //            if (respuesta.IsSuccessStatusCode)
+        //            {
+        //                string responseContent = await respuesta.Content.ReadAsStringAsync();
+        //                return !string.IsNullOrEmpty(responseContent); // Respuesta para cuando el correo existe
+        //            }
+        //            else
+        //            {
+        //                Console.WriteLine($"Error en la respuesta: {respuesta.StatusCode}");
+        //                return false; // Respuesta por si el correo no esta registrado
+        //            }
 
-                    var respuesta = await cliente.GetAsync(url);
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            Console.WriteLine($"Error al hacer la solicitud: {ex.Message}");
+        //            return false;
+        //        }
 
-                    if (respuesta.IsSuccessStatusCode)
-                    {
-                        string responseContent = await respuesta.Content.ReadAsStringAsync();
-                        return string.IsNullOrEmpty(responseContent) ? EmailValidationResult.NotFound : EmailValidationResult.Success;
-                    }
-                    else
-                    {
-                        // Si el código de estado es 404, significa que el correo no se encuentra
-                        if (respuesta.StatusCode == System.Net.HttpStatusCode.NotFound)
-                        {
-                            Console.WriteLine($"El correo no existe.");
-                            return EmailValidationResult.NotFound;
-                        }
-                        else
-                        {
-                            Console.WriteLine($"Error en la respuesta: {respuesta.StatusCode}");
-                            return EmailValidationResult.ServerError;
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Error al hacer la solicitud: {ex.Message}");
-                    return EmailValidationResult.ServerError;
-                }
-            }
+        //    }
+        //}
 
-        }
-
-        public async Task Validation()
+        public void Validation()
         {
             MsgUser = string.Empty;
             MsgPass = string.Empty;
 
             bool isValid = true;
-
-            if (string.IsNullOrWhiteSpace(Username) || !Username.Contains("@"))
-            {
-                MsgUser = "El correo electrónico es inválido.";
-                isValid = false;
-            }
-   
-
+  
             if (string.IsNullOrWhiteSpace(Password))
             {
                 MsgPass = "El campo no debe estar vacío.";
                 isValid = false;
             }
 
-            EmailValidationResult resp = await FindByEmail(Username);
-            if (resp == EmailValidationResult.NotFound)
+            if (string.IsNullOrWhiteSpace(Username) || !Username.Contains("@"))
             {
-                MsgUser = "El correo no existe, intente nuevamente.";
-                isValid = false;
-            }
-            else if (resp == EmailValidationResult.ServerError)
-            {
-                MsgUser = "Hubo un error en el servidor. Por favor, intente más tarde.";
+                MsgUser = "El correo electrónico es inválido.";
                 isValid = false;
             }
 
+  
             Sumit = isValid;
         }
 
-        public async Task Login(UserModel userModel)
+        public async Task Login()
         {
+            Validation();
 
+            if(!Sumit) return;
 
-            await Validation(); 
+            string username = Uri.EscapeDataString(Username);
+            string password = Uri.EscapeDataString(Password); 
 
-            if (!Sumit) return;
+            
+            string url = $"https://h387mpbd-5062.usw3.devtunnels.ms/api/User/Login?correo={username}&pass={password}";
 
-            userModel.Correo = Username.Trim();
-            userModel.Password = Password.Trim();
-
-            using (var cliente = new HttpClient())
+            try
             {
-                try
+                using (HttpClient client = new HttpClient())
                 {
-                    string json = JsonSerializer.Serialize(userModel);
-                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+                 
+                    var response = await client.PostAsync(url, null); // POST sin cuerpo
 
-                    var respuesta = await cliente.PostAsync("https://934vm7pw-5062.usw3.devtunnels.ms/api/User/Login", content);
-
-                    if (respuesta.IsSuccessStatusCode)
+                    if (response.IsSuccessStatusCode)
                     {
+                        
                         await GoTo();
                     }
                     else
-                    {
-                        string errorResponse = await respuesta.Content.ReadAsStringAsync();
-                        Console.WriteLine($"Error en la respuesta: {respuesta.StatusCode}, {errorResponse}");
-
-                        if (respuesta.StatusCode == HttpStatusCode.Unauthorized)
-                        {
-                            MsgUser = "Correo o contraseña incorrectos. Por favor, intente nuevamente.";
-                        }
-                        else
-                        {
-                            MsgUser = "Hubo un error al realizar el login. Intente más tarde.";
-                        }
+                    {                    
+                        string responseContent = await response.Content.ReadAsStringAsync();
+                        MsgUser = "Corro o contraseña inválida. Intente nuevamente.";
                     }
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Error en la solicitud: {ex.Message}");
-                    MsgUser = "Hubo un error al intentar conectar con el servidor. Intente más tarde.";
-                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error en la conexión: " + ex.Message);
             }
         }
 
-
-
+    
 
         public async Task SingUp()
         {
@@ -234,14 +199,14 @@ namespace SmartGreen.ViewModel
         {
             await Shell.Current.GoToAsync($"/{nameof(Recovery1)}");
         }
-        //Comandos
-        public ICommand ToMenu => new Command(async () => await Login(new UserModel()));
-        public ICommand ToSingUp => new Command(async() => await SingUp());
+        #endregion
 
-        public ICommand ToRecovery => new Command(async () => await RecoveryP());
-
-
-
+        #region COMMANDS
+                public ICommand LogOutCommand { get; }
+                public ICommand ToMenu => new Command(async () => await Login());
+                public ICommand ToSingUp => new Command(async() => await SingUp());
+                public ICommand ToRecovery => new Command(async () => await RecoveryP());
+        #endregion
 
     }
 }

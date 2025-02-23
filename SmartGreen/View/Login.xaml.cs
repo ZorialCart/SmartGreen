@@ -11,5 +11,5 @@ public partial class Login : ContentPage
         VMLogin vMLogin = new VMLogin();
         BindingContext = vMLogin;
 
-    }
+        }
 }
