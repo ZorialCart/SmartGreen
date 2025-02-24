@@ -217,7 +217,10 @@ namespace SmartGreen.ViewModel
             }
         }
 
-
+        public async Task Pruebaa()
+        {
+            await Shell.Current.GoToAsync($"/{nameof(MenuInvernaderos)}");
+        }
 
 
         public async Task SingUp()
@@ -237,6 +240,7 @@ namespace SmartGreen.ViewModel
         //Comandos
         public ICommand ToMenu => new Command(async () => await Login(new UserModel()));
         public ICommand ToSingUp => new Command(async() => await SingUp());
+        public ICommand Paraprobar => new Command(async() => await Pruebaa());
 
         public ICommand ToRecovery => new Command(async () => await RecoveryP());
 

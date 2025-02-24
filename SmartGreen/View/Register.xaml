@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SmartGreen.View.Register" BackgroundImageSource="hum.jpg" Opacity=".9"
+             x:Class="SmartGreen.View.Register" BackgroundImageSource="fondo.jpg" Opacity=".9"
              Shell.FlyoutBehavior="Disabled" Shell.NavBarIsVisible="False">
     <VerticalStackLayout>
         <Grid RowDefinitions="Auto, Auto, Auto, *">
@@ -14,7 +14,7 @@
             </Grid>
 
             <Grid Grid.Row="1">
-                <Image Source="logooff.png" Scale=".8" Margin="0,35,0,110"/>
+                <Image Source="logo.png" Scale=".8" Margin="0,35,0,110"/>
                 <Label FontAttributes="Bold" FontFamily="bold"
                    FontSize="28"
                    Text="Crear una nueva cuenta" VerticalOptions="Center"

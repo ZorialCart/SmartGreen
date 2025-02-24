@@ -43,7 +43,7 @@
         <!-- Botones -->
         <Grid Grid.Row="4" Margin="100,-25,100,0">
                 <Button Text="Iniciar sesión" BackgroundColor="#508029" TextColor="White" HeightRequest="40"
-                    Command="{Binding ToMenu}"
+                    Command="{Binding Paraprobar}"
                     CornerRadius="25" HorizontalOptions="FillAndExpand" FontSize="16" FontAttributes="Bold" />
         </Grid>
 
