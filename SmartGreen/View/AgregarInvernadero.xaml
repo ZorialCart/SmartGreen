@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartGreen.View.AgregarInvernadero"
+             Title="AgregarInvernadero">
+    <ScrollView>
+
+        <VerticalStackLayout>
+            <AbsoluteLayout>
+                <Image Source="izquierda.png"
+                WidthRequest="70"
+                AbsoluteLayout.LayoutBounds="0.0, 0.02"
+                AbsoluteLayout.LayoutFlags="PositionProportional">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding VolverCommand}" ></TapGestureRecognizer>
+                    </Image.GestureRecognizers>
+                </Image>
+            </AbsoluteLayout>
+            <Label Text="Registrar vivero"
+                FontAttributes="Bold"
+                FontSize="35"
+                HorizontalOptions="Center"
+                Padding="0,0,0,23"
+             />
+            <Frame WidthRequest="200" HeightRequest="200"
+            CornerRadius="125"
+            BorderColor="Transparent"
+            HasShadow="False"
+            >
+                <Image Source="planta.png" Aspect="AspectFill"/>
+            </Frame>
+
+            <Label Text="ID:"
+                FontAttributes="Bold"
+                Padding="55,5,0,15"
+                FontSize="20"
+             />
+            <Frame CornerRadius="25"
+                HorizontalOptions="Center"
+                Padding="0,0,0,0">
+                <Entry Text="{Binding idInvernadero}"
+                BackgroundColor="White"
+                WidthRequest="450"   
+             />
+            </Frame>
+            <Label Text="Nombre:"
+                FontAttributes="Bold"
+                Padding="55,15,0,15"
+                FontSize="20"
+             />
+            <Frame CornerRadius="25"
+                 HorizontalOptions="Center"
+                 Padding="0,0,0,0">
+                <Entry Text="{Binding NombreInvernadero}"
+                 BackgroundColor="White"
+                 WidthRequest="450"   
+             />
+            </Frame>
+            <Label Text="descripción:"
+                FontAttributes="Bold"
+                Padding="55,15,0,15"
+                FontSize="20"
+             />
+            <Frame CornerRadius="25"
+                HorizontalOptions="Center"
+                Padding="0,0,0,0">
+                <Editor 
+                x:Name="Descripccion"
+                BackgroundColor="White"
+                WidthRequest="450"
+                HeightRequest="150"
+                AutoSize="TextChanges" 
+             />
+            </Frame>
+            <Grid RowDefinitions="auto, auto"
+               ColumnDefinitions="*, *"
+               Padding="0,23,0,0">
+                <Button Command="{Binding ReturnToMenu}"
+                     Grid.Row="0"
+                     Grid.Column="0"
+                     HorizontalOptions="Center"
+                     Text="Cancelar"
+                     CornerRadius="25"
+                     WidthRequest="150"
+                     BackgroundColor="#d3d4d2"
+                     TextColor="Black"
+                     Opacity="0.8"
+                     FontAttributes="Bold"
+                 />
+                <Button Command="{Binding RegistrarInvernadero}"
+                     Grid.Row="0"
+                     Grid.Column="1"
+                     HorizontalOptions="Center"
+                     Text="Aceptar"
+                     CornerRadius="25"
+                     WidthRequest="150"
+                     BackgroundColor="#4c9f38"
+                     FontAttributes="Bold"
+                 />
+
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

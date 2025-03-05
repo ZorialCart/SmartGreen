@@ -14,6 +14,10 @@ namespace SmartGreen
             Routing.RegisterRoute("Recovery1", typeof (Recovery1));
             Routing.RegisterRoute("Recovery2", typeof(Recovery2));
             Routing.RegisterRoute("GreenHouseView", typeof(GreenHouseView));
+            Routing.RegisterRoute("MenuInvernaderos", typeof(MenuInvernaderos));
+            Routing.RegisterRoute("AgregarInvernadero", typeof(AgregarInvernadero));
+
+
         }
     }
 }
