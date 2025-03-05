@@ -14,15 +14,17 @@
             </Grid>
 
             <Grid Grid.Row="1">
-                <Image Source="logo.png" Scale=".8" Margin="0,35,0,110"/>
+                <Image Source="logo.png" Scale=".6" Margin="0,35,0,110"/>
                 <Label FontAttributes="Bold" FontFamily="bold"
                    FontSize="28"
                    Text="Crear una nueva cuenta" VerticalOptions="Center"
                    HorizontalOptions="Center"
-                   TextColor="#508029" Margin="0,140,0,10"/>
+                   TextColor="#508029" Margin="0,140,0,10"
+                       Padding="0,21,0,0"/>
                 <Label Text="Ingrese sus datos en los siguientes campos para continuar." FontFamily="bold" 
                        FontSize="16" Margin="30,265,30,0"
-                       HorizontalOptions="Center" TextColor="#777965"/>
+                       HorizontalOptions="Center" TextColor="#777965"
+                       Padding="0,37,0,0"/>
             </Grid>
 
             <!-- Campos de entrada -->

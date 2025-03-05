@@ -254,7 +254,7 @@ namespace SmartGreen.ViewModel
                 {
                     string json = JsonSerializer.Serialize(userModel);
                     var content = new StringContent(json, Encoding.UTF8, "application/json");
-                    var respuesta = await cliente.PostAsync("https://934vm7pw-5062.usw3.devtunnels.ms/api/User/Register", content); 
+                    var respuesta = await cliente.PostAsync("http://192.168.1.95:5062/api/User/Register", content); 
 
                     if (respuesta.IsSuccessStatusCode)
                     {

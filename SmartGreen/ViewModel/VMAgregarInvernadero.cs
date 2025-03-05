@@ -167,7 +167,7 @@ public class VMAgregarInvernadero : BaseViewModel
     {
         inverModel.idInvernadero = idInvernadero.Trim();
         inverModel.nombreInvernadero = nombreInvernadero.Trim();
-        inverModel.UsuCorreo = correo;
+        inverModel.usuCorreo = correo;
 
 
         using (var cliente = new HttpClient())

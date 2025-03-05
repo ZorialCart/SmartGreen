@@ -17,24 +17,27 @@
             Text="Monitoreo" TextColor="#508029"
             VerticalOptions="Center" 
             HorizontalOptions="Center" 
-            Padding="0,0,0,0"
-            FontSize="25"
+            Padding="0,0,0,33"
+            FontSize="35"
             FontAttributes="Bold" FontFamily="bold" 
             />
                 <Label 
-            Text="Vivero 1" TextColor="Black"
+            Text="{Binding NombreInvernadero}" TextColor="Black"
             VerticalOptions="Center" 
             HorizontalOptions="Center" 
-            FontSize="23"
+            FontSize="33"
             FontAttributes="Bold" FontFamily="bold"
+            Padding="0,0,0,33"
             />
                 <!-- Imagen de la planta -->
                 <Frame WidthRequest="200" HeightRequest="200"
                CornerRadius="125"
                BorderColor="Transparent"
-               HasShadow="False">
+               HasShadow="False"
+               >
                     <Image Source="plant.png"
-                           Aspect="AspectFill"/>
+                           Aspect="AspectFill"
+                           />
                 </Frame>
 
                 <!-- Marco circular (indicador de porcentaje) 
@@ -43,13 +46,15 @@
 
                 <Label
                     Text="{Binding Humedad, StringFormat='Humedad actual: {0}%'}" FontAttributes="Bold" FontFamily="bold"
-                    FontSize="20"
+                    FontSize="25"
                     HorizontalOptions="Center"
+                    Padding="0,22,0,0"
                 />
                 <Label
                     Text="{Binding Temperatura, StringFormat='Temperatura actual: {0}%'}" FontAttributes="Bold" FontFamily="bold"
-                    FontSize="20"
+                    FontSize="25"
                     HorizontalOptions="Center"
+                    Padding="0,22,0,0"
                 />
                 <!-- Texto del porcentaje -->
 
@@ -57,12 +62,13 @@
                     Text="Control de humedad" 
                     Clicked="OnOpenPopupClicked"
                     VerticalOptions="End" FontAttributes="Bold"
-                    Margin="90,0,90,0"
+                    Margin="90,20,90,20"
                     CornerRadius="25"
                     HeightRequest="50"
                     WidthRequest="300"
                     FontSize="20"
-                    BackgroundColor="#9aa158"/>
+                    BackgroundColor="#9aa158"
+                    />
                 <Frame CornerRadius="25"
                        WidthRequest="300">
                     <StackLayout BackgroundColor="White">
@@ -75,7 +81,7 @@
                         <Switch IsToggled="{Binding Started}"
                                 Toggled="OnSwitchToggled"
                                 HorizontalOptions="Center"
-                                Scale="1." />
+                                Scale="2" />
                     </StackLayout>
                 </Frame>
 

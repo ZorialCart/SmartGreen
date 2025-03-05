@@ -4,7 +4,7 @@ namespace SmartGreen.View;
 
 public partial class MenuInvernaderos : ContentPage
 {
-	public MenuInvernaderos()
+    public MenuInvernaderos()
 	{
 		InitializeComponent();
         VMmenuInvernaderos vMmenuInvernaderos = new VMmenuInvernaderos();

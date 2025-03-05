@@ -10,14 +10,14 @@ namespace SmartGreen.Model
     {
         public string? id { get; set; }
         public string? idInvernadero { get; set; }
-        public string? UsuCorreo { get; set; }
-        public string? NombreInvernadero { get; set; }
-        public string? Descripcion { get; set; }
-        public int TipoInvernadero { get; set; }
-        public double MinHumedad { get; set; }
-        public double MaxHumedad { get; set; }
-        public double MinTemperatura { get; set; }
-        public double MaxTemperatura { get; set; }
-        public bool Started { get; set; }
+        public string? usuCorreo { get; set; }
+        public string? nombreInvernadero { get; set; }
+        public string? descripcion { get; set; }
+        public int tipoInvernadero { get; set; }
+        public double minHumedad { get; set; }
+        public double maxHumedad { get; set; }
+        public double minTemperatura { get; set; }
+        public double maxTemperatura { get; set; }
+        public bool started { get; set; }
     }
 }

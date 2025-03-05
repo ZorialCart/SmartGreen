@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmartGreen.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace SmartGreen.ViewModel
     internal class VMMenuView : BaseViewModel
     {
         public ICommand OpenFlyoutCommand { get; }
+        //private readonly UserModel _user;
         public VMMenuView()
         {
             OpenFlyoutCommand = new Command(OpenFlyout);

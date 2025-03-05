@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Input;
 using SmartGreen.Model;
 using SmartGreen.View;
@@ -22,12 +23,14 @@ public class VMmenuInvernaderos : BaseViewModel
     private double _minTemperatura;
     private double _MaxTemperatura;
     private bool _started;
+    private readonly UserModel _user;
 
     // Constructor
     public VMmenuInvernaderos()
     {
         Invernaderos = new ObservableCollection<InvernaderoModel>();
         _ = CargarDatosAsync(); // Llama al método asíncrono
+        
     }
 
     // Llamado desde el constructor
@@ -167,19 +170,19 @@ public class VMmenuInvernaderos : BaseViewModel
     }
 
     public ObservableCollection<InvernaderoModel> Invernaderos { get; set; }
-    string correo = "alex@gmail.com";
+    string correo = "corickgonzalez123@gmail.com";
     public async Task FindInvernaderos()
     {
         using (var cliente = new HttpClient())
         {
             try
             {
-                string url = $"https://h387mpbd-5062.usw3.devtunnels.ms/api/Invernadero/FindByEmail/{correo}";
+                string url = $"http://192.168.1.95:5062/api/Invernadero/FindByEmail/{correo}";
                 var respuesta = await cliente.GetAsync(url);
 
                 // Debug: imprime respuesta JSON
                 string json = await respuesta.Content.ReadAsStringAsync();
-                Console.WriteLine($"Respuesta de la API: {json}");
+                //Console.WriteLine($"Respuesta de la API: {json}");
 
                 if (respuesta.IsSuccessStatusCode)
                 {
@@ -207,6 +210,14 @@ public class VMmenuInvernaderos : BaseViewModel
         }
     }
 
+    public async Task GoToInverStatus(InvernaderoModel invernadero)
+    {
+        // Serializar el modelo a JSON y codificarlo en la URL
+        string json = JsonSerializer.Serialize(invernadero);
+        string encodedJson = HttpUtility.UrlEncode(json);
+        await Shell.Current.GoToAsync($"/GreenHouseView?invernadero={encodedJson}");
+    }
+
     // Método para ir a la página de registro
     public async Task GoToRegisterInvernadero()
     {
@@ -215,5 +226,6 @@ public class VMmenuInvernaderos : BaseViewModel
 
     // Comando
     public ICommand GoToRegInv => new Command(async () => await GoToRegisterInvernadero());
+    public ICommand GoToInverStatusCommand => new Command<InvernaderoModel>(async (invernadero) => await GoToInverStatus(invernadero));
 }
 

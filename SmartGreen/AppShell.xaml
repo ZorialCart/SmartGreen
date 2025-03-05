@@ -8,7 +8,7 @@
     Shell.FlyoutBehavior="Flyout" 
     NavigationPage.HasNavigationBar="True"
     Shell.FlyoutItemIsVisible="True"
-    Shell.NavBarIsVisible="True"  
+    Shell.NavBarIsVisible="False"  
     Title="SmartGreen"
     >
 
@@ -19,14 +19,14 @@
     </Shell.FlyoutHeader>
 
     <ShellItem Title="Inicio" Route="Login" IsVisible="True" IsEnabled="True"  Icon="home.png">
-        <ShellContent ContentTemplate="{DataTemplate view:Login}"/> 
+        <ShellContent ContentTemplate="{DataTemplate view:Login}"/>
     </ShellItem>
 
     <ShellContent Title="Registrar invernadero" Icon="add.png"/>
     <ShellContent Title="Notificaciones" Icon="notify.png"/>
     <ShellContent Title="Estadísticas" Icon="grafico.png"/>
 
-    
+
     <ShellContent Title="Cuenta" Icon="cuenta.png"/>
     <MenuItem Text="Salir" Command="{Binding LogOutCommand}" IconImageSource="salida.png"/>
 

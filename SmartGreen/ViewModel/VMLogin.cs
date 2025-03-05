@@ -13,6 +13,7 @@ using SmartGreen.View.ViveroView;
 using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Web;
 
 namespace SmartGreen.ViewModel
 {
@@ -168,7 +169,6 @@ namespace SmartGreen.ViewModel
 
                     if (response.IsSuccessStatusCode)
                     {
-                        
                         await GoTo();
                     }
                     else
@@ -198,6 +198,9 @@ namespace SmartGreen.ViewModel
         public async Task GoTo()
         {
             await Shell.Current.GoToAsync($"/{nameof(MenuView)}");
+            //string json = System.Text.Json.JsonSerializer.Serialize(user);
+            //string encodedJson = HttpUtility.UrlEncode(json);
+            //await Shell.Current.GoToAsync($"/MenuView?user={encodedJson}");
         }
 
         public async Task RecoveryP()
@@ -205,19 +208,18 @@ namespace SmartGreen.ViewModel
             await Shell.Current.GoToAsync($"/{nameof(Recovery1)}");
         }
         //Comandos
-        public ICommand ToMenu => new Command(async () => await Login(new UserModel()));
-        public ICommand ToSingUp => new Command(async() => await SingUp());
-        public ICommand Paraprobar => new Command(async() => await Pruebaa());
+
+
+        #endregion
+
+        #region COMMANDS
+        public ICommand LogOutCommand { get; }
+        public ICommand ToMenu => new Command(async () => await Login());
+        public ICommand ToSingUp => new Command(async () => await SingUp());
+        public ICommand Paraprobar => new Command(async () => await Pruebaa());
 
         public ICommand ToRecovery => new Command(async () => await RecoveryP());
 
-
-
-        #region COMMANDS
-                public ICommand LogOutCommand { get; }
-                public ICommand ToMenu => new Command(async () => await Login());
-                public ICommand ToSingUp => new Command(async() => await SingUp());
-                public ICommand ToRecovery => new Command(async () => await RecoveryP());
         #endregion
 
     }

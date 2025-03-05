@@ -10,9 +10,10 @@ namespace SmartGreen.Model
     {
         public string? id { get; set; }
         public string? idInvernadero { get; set; }
-        public double CurrentHumedad { get; set; }
-        public double CurrentTemperatura { get; set; }
-        public double CurrentLuz { get; set; }
-        public DateTime Fecha { get; set; } = DateTime.UtcNow;
+        public string? nombreInvernadero { get; set; }
+        public double currentHumedad { get; set; }
+        public double currentTemperatura { get; set; }
+        public double currentLuz { get; set; }
+        public DateTime cecha { get; set; } = DateTime.UtcNow;
     }
 }
