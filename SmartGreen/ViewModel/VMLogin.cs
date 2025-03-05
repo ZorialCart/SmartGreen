@@ -153,10 +153,11 @@ namespace SmartGreen.ViewModel
             if(!Sumit) return;
 
             string username = Uri.EscapeDataString(Username);
-            string password = Uri.EscapeDataString(Password); 
+            string password = Uri.EscapeDataString(Password);
 
-            
-            string url = $"https://h387mpbd-5062.usw3.devtunnels.ms/api/User/Login?correo={username}&pass={password}";
+
+            //string url = $"https://h387mpbd-5062.usw3.devtunnels.ms/api/User/Login?correo={username}&pass={password}";
+            string url = $"http://192.168.1.95:5062/api/User/Login?correo={username}&pass={password}";
 
             try
             {
