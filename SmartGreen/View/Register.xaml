@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartGreen.View.Register" BackgroundImageSource="fondo.jpg" Opacity=".9"
+             Shell.FlyoutBehavior="Disabled" Shell.NavBarIsVisible="False">
+    <VerticalStackLayout>
+        <Grid RowDefinitions="Auto, Auto, Auto, *">
+            <!-- Fondo blanco redondeado -->
+            <Grid Grid.Row="0">
+                <RoundRectangle Margin="15,50,15,-750"
+                            CornerRadius="30,30,30,30"
+                            Fill="White"
+                            Opacity=".7"/>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Image Source="logo.png" Scale=".6" Margin="0,35,0,110"/>
+                <Label FontAttributes="Bold" FontFamily="bold"
+                   FontSize="28"
+                   Text="Crear una nueva cuenta" VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   TextColor="#508029" Margin="0,140,0,10"
+                       Padding="0,21,0,0"/>
+                <Label Text="Ingrese sus datos en los siguientes campos para continuar." FontFamily="bold" 
+                       FontSize="16" Margin="30,265,30,0"
+                       HorizontalOptions="Center" TextColor="#777965"
+                       Padding="0,37,0,0"/>
+            </Grid>
+
+            <!-- Campos de entrada -->
+            <Grid Grid.Row="2" Margin="30,-60,30,0">
+                <Entry Text="{Binding Nombre}"  Placeholder="Nombre" HeightRequest="40" FontSize="18" TextColor="Black" PlaceholderColor="Gray"/>
+                <Label Text="{Binding MsgNombre}" Margin="0,40,30,0" TextColor="Red"/>
+            </Grid>
+
+            <Grid Grid.Row="3" Margin="30,-300,30,0">
+                <Entry Text="{Binding Correo}" Placeholder="Correo" HeightRequest="40" FontSize="18" TextColor="Black" Keyboard="Email" PlaceholderColor="Gray"/>
+                <Label Text="{Binding MsgEmail}" Margin="0,345,30,0"  TextColor="Red"/>
+
+            </Grid>
+            <Grid Grid.Row="4" Margin="30,-180,30,0">
+                <Entry Text="{Binding Celular}" Placeholder="Celular" HeightRequest="40" FontSize="18" TextColor="Black" Keyboard="Numeric" PlaceholderColor="Gray"/>
+                <Label Text="{Binding MsgCelular}" Margin="0,285,30,0" TextColor="Red"/>
+
+            </Grid>
+            <Grid Grid.Row="5" Margin="30,-60,30,0">
+                <Entry  Text="{Binding Password}" Placeholder="Contraseña" IsPassword="True" HeightRequest="40" FontSize="18" TextColor="Black" PlaceholderColor="Gray" />
+                <Label Text="{Binding PassMistake}" Margin="0,225,30,0"   TextColor="Red"/>
+            </Grid>
+            <Grid Grid.Row="6" Margin="30,70,30,0" >
+                <Entry Text="{Binding ConfirmPass}" Placeholder="Confirmar contraseña" IsPassword="True" HeightRequest="40" FontSize="18" TextColor="Black" PlaceholderColor="Gray"  />
+                <Label Text="{Binding ConfirmPassMistake}"  Margin="0,160,30,0"  TextColor="Red"/>
+            </Grid>
+
+            <!-- Botones -->
+            <Grid Grid.Row="7" Margin="100,220,100,0">
+                <Button Text="Registrarse" BackgroundColor="#508029" TextColor="White" HeightRequest="42"
+                 CornerRadius="25" HorizontalOptions="FillAndExpand" FontSize="16" FontAttributes="Bold" Command="{Binding GoCmd}"/>
+            </Grid>
+            <Grid Grid.Row="8" Margin="100,320,100,0">
+                <Button Text="Cancelar" BackgroundColor="#b2b0a8" TextColor="White" HeightRequest="42"
+                        Command="{Binding ReturnToLogin}"
+           CornerRadius="25" HorizontalOptions="FillAndExpand" FontSize="16" FontAttributes="Bold"/>
+            </Grid>
+
+            <!--<Grid Grid.Row="7">
+                <Label Text="¿Olvidaste tu contraseña?" TextColor="Black" FontSize="12"
+                   HorizontalOptions="Center" TextDecorations="Underline" Margin="0,270,0,0">
+                </Label>
+            </Grid>-->
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

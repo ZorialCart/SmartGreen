@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartGreen.View.MenuInvernaderos"
+             Title="MenuInvernaderos">
+    
+    
+    <VerticalStackLayout>
+
+
+        <Grid>
+            <Grid>
+                <Image Source="fondo.jpg"
+             Scale="1.4"
+             Opacity="0.8"
+             Aspect="AspectFill"
+             />
+
+                <RoundRectangle Margin="15,10,15,0"
+                      CornerRadius="30"
+                      Fill="White"
+                      Opacity="0.4"
+                      VerticalOptions="Start"
+                      HeightRequest="230"/>
+
+                <Image Source="logooff.png"
+             HeightRequest="180"
+             HorizontalOptions="Center"
+             VerticalOptions="Start"
+             Margin="0,30,0,0"/>
+            </Grid>
+
+
+
+
+            <CollectionView ItemsSource="{Binding Invernaderos}" 
+                            Margin="0,260,0,0"
+                            x:Name="invernaderos">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10" Margin="100,10,100,0" 
+                               CornerRadius="10" 
+                               BackgroundColor="White" 
+                               HasShadow="True" 
+                               WidthRequest="300"
+                               HeightRequest="70">
+                            <Grid ColumnDefinitions="Auto, *, Auto">
+                                <ScrollView>
+                                    <VerticalStackLayout Spacing="20" Margin="0,0,0,0">
+                                        <Button BackgroundColor="White"
+                                              Text="{Binding nombreInvernadero}"
+                                              TextColor="Black"
+                                              HorizontalOptions="Center"
+                                              HeightRequest="50"
+                                              WidthRequest="280"
+                                              CornerRadius="30"
+                                              FontSize="Body"
+                                              Command="{Binding Source={x:Reference invernaderos}, Path=BindingContext.GoToInverStatusCommand}"
+                                              CommandParameter="{Binding}"
+                                              FontAttributes="Bold"
+                                         />
+                                    </VerticalStackLayout>
+                                </ScrollView>
+                                <!--<Grid.GestureRecognizers>
+                                    <TapGestureRecognizer "/>
+                                </Grid.GestureRecognizers>-->
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button BackgroundColor="NavajoWhite"
+          CornerRadius="20"
+          Margin="0,0,25,200"
+          WidthRequest="50"
+          HeightRequest="50"
+          HorizontalOptions="End"
+          VerticalOptions="End"
+          ImageSource="add.png"
+          TextColor="Black"
+           Command="{Binding GoToRegInv}"/>
+        </Grid>
+
+
+    </VerticalStackLayout>
+    
+    
+</ContentPage>
