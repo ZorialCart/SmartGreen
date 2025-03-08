@@ -28,7 +28,7 @@
 
     
     <ShellContent Title="Cuenta" Icon="cuenta.png"/>
-    <MenuItem Text="Salir" Command="{Binding LogOutCommand}" IconImageSource="salida.png"/>
+    <MenuItem Text="Salir" Command="{Binding ToLogOut}" IconImageSource="salida.png"/>
 
 
 </Shell>

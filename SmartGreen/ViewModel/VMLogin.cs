@@ -13,6 +13,7 @@ using SmartGreen.View.ViveroView;
 using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Net.Http.Json;
 
 namespace SmartGreen.ViewModel
 {
@@ -20,6 +21,7 @@ namespace SmartGreen.ViewModel
     {
         public VMLogin()
         {
+
         }
 
         #region VARIABLES
@@ -91,37 +93,6 @@ namespace SmartGreen.ViewModel
         #endregion
 
         #region METHODS
-        //public async Task<bool> FindByEmail(string correo)
-        //{
-        //    using (var cliente = new HttpClient())
-        //    {
-        //        try
-
-        //        {
-        //            string url = $"
-
-        //            var respuesta = await cliente.GetAsync(url);
-
-        //            if (respuesta.IsSuccessStatusCode)
-        //            {
-        //                string responseContent = await respuesta.Content.ReadAsStringAsync();
-        //                return !string.IsNullOrEmpty(responseContent); // Respuesta para cuando el correo existe
-        //            }
-        //            else
-        //            {
-        //                Console.WriteLine($"Error en la respuesta: {respuesta.StatusCode}");
-        //                return false; // Respuesta por si el correo no esta registrado
-        //            }
-
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            Console.WriteLine($"Error al hacer la solicitud: {ex.Message}");
-        //            return false;
-        //        }
-
-        //    }
-        //}
 
         public void Validation()
         {
@@ -129,7 +100,7 @@ namespace SmartGreen.ViewModel
             MsgPass = string.Empty;
 
             bool isValid = true;
-  
+
             if (string.IsNullOrWhiteSpace(Password))
             {
                 MsgPass = "El campo no debe estar vacío.";
@@ -142,7 +113,7 @@ namespace SmartGreen.ViewModel
                 isValid = false;
             }
 
-  
+
             Sumit = isValid;
         }
 
@@ -150,28 +121,34 @@ namespace SmartGreen.ViewModel
         {
             Validation();
 
-            if(!Sumit) return;
+            if (!Sumit) return;
 
-            string username = Uri.EscapeDataString(Username);
-            string password = Uri.EscapeDataString(Password); 
+            LoginModel requestLogin = new()
+            {
+                Email = Username,
+                Password = Password
+            };
 
-            
-            string url = $"https://h387mpbd-5062.usw3.devtunnels.ms/api/User/Login?correo={username}&pass={password}";
+            string url = $"https://934vm7pw-5062.usw3.devtunnels.ms/api/User/Login";
+
+
 
             try
             {
                 using (HttpClient client = new HttpClient())
                 {
-                 
-                    var response = await client.PostAsync(url, null); // POST sin cuerpo
+
+                    var response = await client.PostAsJsonAsync(url, requestLogin); // POST sin cuerpo
 
                     if (response.IsSuccessStatusCode)
                     {
-                        
+                        string token = await response.Content.ReadAsStringAsync();
+                        await SecureStorage.SetAsync("token", token);
+                        await Shell.Current.GoToAsync("//MenuView", true);
                         await GoTo();
                     }
                     else
-                    {                    
+                    {
                         string responseContent = await response.Content.ReadAsStringAsync();
                         MsgUser = "Corro o contraseña inválida. Intente nuevamente.";
                     }
@@ -183,7 +160,11 @@ namespace SmartGreen.ViewModel
             }
         }
 
-    
+        public void DeleteToken()
+        {
+              SecureStorage.Remove("token");
+              Shell.Current.GoToAsync("//Login");
+        }
 
         public async Task SingUp()
         {
@@ -202,10 +183,14 @@ namespace SmartGreen.ViewModel
         #endregion
 
         #region COMMANDS
-                public ICommand LogOutCommand { get; }
-                public ICommand ToMenu => new Command(async () => await Login());
-                public ICommand ToSingUp => new Command(async() => await SingUp());
-                public ICommand ToRecovery => new Command(async () => await RecoveryP());
+        public ICommand LogOutCommand { get; }
+        public ICommand ToMenu => new Command(async () => await Login());
+        public ICommand ToSingUp => new Command(async () => await SingUp());
+        public ICommand ToRecovery => new Command(async () => await RecoveryP());
+
+        public ICommand ToLogOut => new Command(() => DeleteToken());
+
+
         #endregion
 
     }

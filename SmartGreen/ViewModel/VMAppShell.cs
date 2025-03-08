@@ -14,7 +14,10 @@ namespace SmartGreen.ViewModel
     {
         public VMAppShell() {
             IsBusy = false;   
+           
         }
+
+      
     }
 }
 
