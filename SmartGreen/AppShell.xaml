@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:SmartGreen"
     xmlns:view="clr-namespace:SmartGreen.View"
+    xmlns:menu="clr-namespace:SmartGreen.View.ViveroView"
     Shell.FlyoutBehavior="Flyout" 
     NavigationPage.HasNavigationBar="True"
     Shell.FlyoutItemIsVisible="True"
@@ -18,8 +19,12 @@
         </StackLayout>
     </Shell.FlyoutHeader>
 
-    <ShellItem Title="Inicio" Route="Login" IsVisible="True" IsEnabled="True"  Icon="home.png">
+    <ShellItem IsVisible="False" IsEnabled="True">
         <ShellContent ContentTemplate="{DataTemplate view:Login}"/>
+    </ShellItem>
+    
+    <ShellItem Title="Inicio" Route="MenuView" Icon="home.png">
+        <ShellContent ContentTemplate="{DataTemplate menu:MenuView}" />
     </ShellItem>
 
     <ShellContent Title="Registrar invernadero" Icon="add.png"/>
@@ -28,7 +33,8 @@
 
     
     <ShellContent Title="Cuenta" Icon="cuenta.png"/>
-    <MenuItem Text="Salir" Command="{Binding ToLogOut}" IconImageSource="salida.png"/>
+
+    <MenuItem Text="Salir" Command="{Binding LogOutCommand}" IconImageSource="salida.png"/>
 
 
 </Shell>

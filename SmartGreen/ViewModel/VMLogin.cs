@@ -14,14 +14,14 @@ using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Net.Http.Json;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace SmartGreen.ViewModel
 {
-    internal class VMLogin : BaseViewModel
-    {
+    public class VMLogin : BaseViewModel
+    {         
         public VMLogin()
         {
-
         }
 
         #region VARIABLES
@@ -29,6 +29,7 @@ namespace SmartGreen.ViewModel
         private string _password;
         private string _msgUser;
         private string _msgPass;
+        private bool _isLoggedIn;
         bool _sumit;
 
         public string Username
@@ -83,6 +84,11 @@ namespace SmartGreen.ViewModel
                 }
             }
         }
+        public bool IsLoggedIn
+        {
+            get => _isLoggedIn;
+            set => SetProperty(ref _isLoggedIn, value);
+        }
 
         public bool Sumit
         {
@@ -101,6 +107,8 @@ namespace SmartGreen.ViewModel
 
             bool isValid = true;
 
+            
+
             if (string.IsNullOrWhiteSpace(Password))
             {
                 MsgPass = "El campo no debe estar vacío.";
@@ -117,7 +125,7 @@ namespace SmartGreen.ViewModel
             Sumit = isValid;
         }
 
-        public async Task Login()
+        public async void Login()
         {
             Validation();
 
@@ -144,13 +152,13 @@ namespace SmartGreen.ViewModel
                     {
                         string token = await response.Content.ReadAsStringAsync();
                         await SecureStorage.SetAsync("token", token);
+                        IsLoggedIn = true;
                         await Shell.Current.GoToAsync("//MenuView", true);
-                        await GoTo();
                     }
                     else
                     {
                         string responseContent = await response.Content.ReadAsStringAsync();
-                        MsgUser = "Corro o contraseña inválida. Intente nuevamente.";
+                        MsgUser = "Correo o contraseña inválida. Intente nuevamente.";
                     }
                 }
             }
@@ -160,10 +168,23 @@ namespace SmartGreen.ViewModel
             }
         }
 
-        public void DeleteToken()
+
+        private async void LogOut()
         {
-              SecureStorage.Remove("token");
-              Shell.Current.GoToAsync("//Login");
+            try
+            {
+                await SecureStorage.SetAsync("token", string.Empty);
+                IsLoggedIn = false;
+                //await Shell.Current.GoToAsync("MenuView"); //Limpia la pila de navegacion
+                //await Shell.Current.Navigation.PopToRootAsync();
+
+                await Shell.Current.GoToAsync("Login");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al cerrar sesión: " + ex.Message);
+            }
+
         }
 
         public async Task SingUp()
@@ -171,10 +192,10 @@ namespace SmartGreen.ViewModel
             await Shell.Current.GoToAsync($"/{nameof(Register)}");
         }
 
-        public async Task GoTo()
-        {
-            await Shell.Current.GoToAsync($"/{nameof(MenuView)}");
-        }
+        //public async Task GoTo()
+        //{
+        //    await Shell.Current.GoToAsync($"/{nameof(MenuView)}");
+        //}
 
         public async Task RecoveryP()
         {
@@ -183,12 +204,12 @@ namespace SmartGreen.ViewModel
         #endregion
 
         #region COMMANDS
-        public ICommand LogOutCommand { get; }
-        public ICommand ToMenu => new Command(async () => await Login());
+        //public ICommand ToMenu => new Command(async () => await Login());
+        public ICommand LoginCommand => new Command(() =>  Login());
         public ICommand ToSingUp => new Command(async () => await SingUp());
         public ICommand ToRecovery => new Command(async () => await RecoveryP());
 
-        public ICommand ToLogOut => new Command(() => DeleteToken());
+        public ICommand LogOutCommand => new Command(() => LogOut());
 
 
         #endregion
