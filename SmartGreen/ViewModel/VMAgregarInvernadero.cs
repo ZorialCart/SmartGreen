@@ -14,161 +14,107 @@ namespace SmartGreen.ViewModel;
 
 public class VMAgregarInvernadero : BaseViewModel
 {
-	public VMAgregarInvernadero()
-	{
-		
-	}
+    // Comandos
+    public ICommand VolverCommand { get; }
+    public ICommand ReturnToMenu { get; }
+    public ICommand RegistrarInvernadero { get; }
 
+    public VMAgregarInvernadero()
+    {
+        VolverCommand = new Command(async () => await VolverAtras());
+        ReturnToMenu = new Command(async () => await BackToMenu());
+        RegistrarInvernadero = new Command(async () => await ResgistrarInvernadero(new InvernaderoModel()));
+    }
+
+    // Propiedades privadas
     private string _nombre;
     private string _idInvernadero;
-    private string _UsuCorreo;
+    private string _usuCorreo;
     private string _nombreInvernadero;
+    private string _descripcion;
     private int _tipoInvernadero;
     private double _minHumedad;
     private double _maxHumedad;
     private double _minTemperatura;
-    private double _MaxTemperatura;
+    private double _maxTemperatura;
     private bool _started;
 
-    string correo = "alex@gmail.com";
+    private readonly string correo = "alex@gmail.com"; // Se puede cambiar si es necesario
+
+    // Propiedades publicas con notificación de cambios (OnPropertyChanged)
     public string Nombre
     {
         get => _nombre;
-        set
-        {
-            if (_nombre != value)
-            {
-                _nombre = value;
-                OnpropertyChanged(nameof(Nombre));
-            }
-        }
+        set => SetProperty(ref _nombre, value);
     }
 
     public string idInvernadero
     {
         get => _idInvernadero;
-        set
-        {
-            if (_idInvernadero != value)
-            {
-                _idInvernadero = value;
-                OnpropertyChanged(nameof(idInvernadero));
-            }
-        }
+        set => SetProperty(ref _idInvernadero, value);
     }
 
     public string UsuCorreo
     {
-        get => _UsuCorreo;
-        set
-        {
-            if (_UsuCorreo != value)
-            {
-                _UsuCorreo = value;
-                OnpropertyChanged(nameof(UsuCorreo));
-            }
-        }
+        get => _usuCorreo;
+        set => SetProperty(ref _usuCorreo, value);
     }
 
-    public string nombreInvernadero
+    public string NombreInvernadero
     {
         get => _nombreInvernadero;
-        set
-        {
-            if (_nombreInvernadero != value)
-            {
-                _nombreInvernadero = value;
-                OnpropertyChanged(nameof(nombreInvernadero));
-            }
-        }
+        set => SetProperty(ref _nombreInvernadero, value);
+    }
+
+    public string Descripcion
+    {
+        get => _descripcion;
+        set => SetProperty(ref _descripcion, value);
     }
 
     public int TipoInvernadero
     {
         get => _tipoInvernadero;
-        set
-        {
-            if (_tipoInvernadero != value)
-            {
-                _tipoInvernadero = value;
-                OnpropertyChanged(nameof(TipoInvernadero));
-            }
-        }
+        set => SetProperty(ref _tipoInvernadero, value);
     }
 
     public double MinHumedad
     {
         get => _minHumedad;
-        set
-        {
-            if (_minHumedad != value)
-            {
-                _minHumedad = value;
-                OnpropertyChanged(nameof(MinHumedad));
-            }
-        }
+        set => SetProperty(ref _minHumedad, value);
     }
 
     public double MaxHumedad
     {
         get => _maxHumedad;
-        set
-        {
-            if (_maxHumedad != value)
-            {
-                _maxHumedad = value;
-                OnpropertyChanged(nameof(MaxHumedad));
-            }
-        }
+        set => SetProperty(ref _maxHumedad, value);
     }
 
     public double MinTemperatura
     {
         get => _minTemperatura;
-        set
-        {
-            if (_minTemperatura != value)
-            {
-                _minTemperatura = value;
-                OnpropertyChanged(nameof(MinTemperatura));
-            }
-        }
+        set => SetProperty(ref _minTemperatura, value);
     }
 
     public double MaxTemperatura
     {
-        get => _MaxTemperatura;
-        set
-        {
-            if (_MaxTemperatura != value)
-            {
-                _MaxTemperatura = value;
-                OnpropertyChanged(nameof(MaxTemperatura));
-            }
-        }
+        get => _maxTemperatura;
+        set => SetProperty(ref _maxTemperatura, value);
     }
 
     public bool Start
     {
         get => _started;
-        set
-        {
-            if (_started != value)
-            {
-                _started = value;
-                OnpropertyChanged(nameof(Start));
-            }
-        }
+        set => SetProperty(ref _started, value);
     }
 
-
-
-    internal async Task ResgistrarInvernadero(InvernaderoModel inverModel)
+    // Registrar un invernadero
+    private async Task ResgistrarInvernadero(InvernaderoModel inverModel)
     {
-        inverModel.idInvernadero = idInvernadero.Trim();
-        inverModel.nombreInvernadero = nombreInvernadero.Trim();
+        inverModel.idInvernadero = idInvernadero?.Trim();
+        inverModel.nombreInvernadero = NombreInvernadero?.Trim();
         inverModel.usuCorreo = correo;
-
+        inverModel.descripcion = Descripcion?.Trim();
 
         using (var cliente = new HttpClient())
         {
@@ -192,20 +138,18 @@ public class VMAgregarInvernadero : BaseViewModel
             {
                 Console.WriteLine($"Error en la solicitud: {ex.Message}");
             }
-
         }
-
     }
 
-
-    public async Task BackToMenu()
+    // Volver al menu de invernaderos
+    private async Task BackToMenu()
     {
         await Shell.Current.GoToAsync($"/{nameof(MenuInvernaderos)}");
     }
 
-
-    //Comandos
-    public ICommand ReturnToMenu => new Command(async () => await BackToMenu());
-    public ICommand RegistrarInvernadero => new Command(async () => await ResgistrarInvernadero(new InvernaderoModel()));
-
+    // Regresar a la página anterior
+    private async Task VolverAtras()
+    {
+        await Shell.Current.GoToAsync("..");
+    }
 }

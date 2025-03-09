@@ -3,8 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartGreen.View.AgregarInvernadero"
              Title="AgregarInvernadero">
+    
     <ContentPage.Resources>
-        <!-- Estilos -->
+        <!-- Estilos optimizados -->
         <Style x:Key="LabelTitleStyle" TargetType="Label">
             <Setter Property="FontAttributes" Value="Bold"/>
             <Setter Property="FontSize" Value="25"/>
@@ -21,17 +22,10 @@
         <Style x:Key="EntryStyle" TargetType="Entry">
             <Setter Property="BackgroundColor" Value="Transparent"/>
             <Setter Property="PlaceholderColor" Value="Gray"/>
-            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="TextColor" Value="Black"/>
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="HeightRequest" Value="50"/>
             <Setter Property="Margin" Value="0,5,0,5"/>
-        </Style>
-
-        <Style x:Key="EditorStyle" TargetType="Editor">
-            <Setter Property="BackgroundColor" Value="Transparent"/>
-            <Setter Property="TextColor" Value="White"/>
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="HeightRequest" Value="120"/>
         </Style>
 
         <Style x:Key="ButtonStyle" TargetType="Button">
@@ -45,16 +39,19 @@
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="20">
 
-            <!-- Botón de regreso y título -->
+            <!-- Encabezado con botón de regreso y título bien centrado -->
             <Grid ColumnDefinitions="Auto, *, Auto">
-                <Image Source="back.png"
-                       WidthRequest="50" Scale=".7"
-                       HorizontalOptions="Start">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding VolverCommand}" />
-                    </Image.GestureRecognizers>
-                </Image>
+                <!-- Botón de regreso -->
+                <Button Text="←"
+                        FontSize="20"
+                        BackgroundColor="Transparent"
+                        TextColor="Black"
+                        Command="{Binding VolverCommand}"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center"
+                        Padding="10"/>
 
+                <!-- Título centrado -->
                 <Label Text="Registrar Vivero"
                        Style="{StaticResource LabelTitleStyle}"
                        Grid.Column="1"
@@ -62,23 +59,27 @@
                        VerticalTextAlignment="Center"/>
             </Grid>
 
-            <!-- Contenedor con fondo redondeado y sin opacidad -->
-            <Frame BackgroundColor="White"
+            <!-- Contenedor con fondo blanco y opacidad SIN afectar el contenido -->
+            <Frame BackgroundColor="Transparent"
                    CornerRadius="30"
-                   Padding="20"
+                   Padding="0"
                    HasShadow="False"
-                   Opacity="1"
-                HorizontalOptions="Fill"
+                   HorizontalOptions="Fill"
                    VerticalOptions="Fill">
 
                 <Grid>
-                    <!-- Fondo blanco con opacidad -->
-                    <BoxView Color="White" Opacity="0.7" CornerRadius="30" HorizontalOptions="Fill" VerticalOptions="Fill" />
+                    <!-- Fondo con opacidad -->
+                    <BoxView Color="White"
+                             Opacity="0.7"
+                             CornerRadius="30"
+                             HorizontalOptions="Fill"
+                             VerticalOptions="Fill"
+                             InputTransparent="True"/>
 
-                    <!-- Contenido dentro del Frame sin opacidad -->
+                    <!-- Contenido sin opacidad -->
                     <VerticalStackLayout Padding="20" Spacing="15">
 
-                        <!-- Imagen del Invernadero -->
+                        <!-- Imagen -->
                         <Frame WidthRequest="150" HeightRequest="150"
                                CornerRadius="50" BorderColor="Transparent"
                                HasShadow="False" HorizontalOptions="Center">
@@ -91,29 +92,27 @@
 
                         <!-- Campo Nombre -->
                         <Label Text="Nombre:" Style="{StaticResource LabelFieldStyle}" />
-                        <Entry Text="{Binding NombreInvernadero}" Style="{StaticResource EntryStyle}" />
+                        <Entry Text="{Binding nombreInvernadero}" Style="{StaticResource EntryStyle}" />
 
-                        <!-- Campo Descripción -->
+                        <!-- Campo Descripción (Asegúrate de que exista en el ViewModel) -->
                         <Label Text="Descripción:" Style="{StaticResource LabelFieldStyle}" />
-                        <Editor x:Name="Descripccion" Style="{StaticResource EditorStyle}"/>
+                        <Editor Text="{Binding Descripcion}" HeightRequest="100"/>
 
-                        <!-- Botones alineados horizontalmente -->
+                        <!-- Botones alineados -->
                         <Grid ColumnDefinitions="*,*" Padding="0,10,0,0">
-                            <Button Command="{Binding ReturnToMenu}"
+                            <Button Command="{Binding VolverCommand}"
                                     Text="Cancelar"
                                     BackgroundColor="#d3d4d2"
                                     TextColor="Black"
                                     Grid.Column="0"
-                                    Style="{StaticResource ButtonStyle}"
-                                    Margin="-20,0,0,0"/>
+                                    Style="{StaticResource ButtonStyle}"/>
 
                             <Button Command="{Binding RegistrarInvernadero}"
                                     Text="Aceptar"
                                     BackgroundColor="#4c9f38"
                                     TextColor="White"
                                     Grid.Column="1"
-                                    Style="{StaticResource ButtonStyle}"
-                                    Margin="20,0,0,0"/>
+                                    Style="{StaticResource ButtonStyle}"/>
                         </Grid>
 
                     </VerticalStackLayout>
