@@ -192,7 +192,7 @@ namespace SmartGreen.ViewModel
             }
             else
             {
-                if (!resp)
+                if (resp)
                 {
                     MsgEmail = "El correo ya existe, intente nuevamente.";
                     isValid = false;
@@ -258,7 +258,7 @@ namespace SmartGreen.ViewModel
 
                     if (respuesta.IsSuccessStatusCode)
                     {
-                        Console.WriteLine("Se creó la cuenta correctamente.");
+                        await DisplayAlert("Mensaje", "La cuenta se creo correctamente.", "Ok");
                         await BackToLogin();
                     }
                     else

@@ -153,7 +153,7 @@ namespace SmartGreen.ViewModel
                         string token = await response.Content.ReadAsStringAsync();
                         await SecureStorage.SetAsync("token", token);
                         IsLoggedIn = true;
-                        await Shell.Current.GoToAsync("//MenuView", true);
+                        await Shell.Current.GoToAsync("MenuView", true);
                     }
                     else
                     {
@@ -176,7 +176,7 @@ namespace SmartGreen.ViewModel
                 await SecureStorage.SetAsync("token", string.Empty);
                 IsLoggedIn = false;
                 //await Shell.Current.GoToAsync("MenuView"); //Limpia la pila de navegacion
-                //await Shell.Current.Navigation.PopToRootAsync();
+                await Shell.Current.Navigation.PopToRootAsync();
 
                 await Shell.Current.GoToAsync("Login");
             }

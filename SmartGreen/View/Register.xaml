@@ -53,7 +53,7 @@
             <!-- Botones -->
             <Grid Grid.Row="7" Margin="100,220,100,0">
                 <Button Text="Registrarse" BackgroundColor="#508029" TextColor="White" HeightRequest="42"
-                 CornerRadius="25" HorizontalOptions="FillAndExpand" FontSize="16" FontAttributes="Bold" Command="{Binding RegisterCMD}"/>
+                 CornerRadius="25" HorizontalOptions="FillAndExpand" FontSize="16" FontAttributes="Bold" Command="{Binding RegisterCmd}"/>
             </Grid>
             <Grid Grid.Row="8" Margin="100,320,100,0">
                 <Button Text="Cancelar" BackgroundColor="#b2b0a8" TextColor="White" HeightRequest="42"
