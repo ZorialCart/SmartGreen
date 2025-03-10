@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartGreen.View.AgregarInvernadero"
-             Title="AgregarInvernadero">
+             Title="AgregarInvernadero"
+             BackgroundImageSource="fondo.png">
     
     <ContentPage.Resources>
         <!-- Estilos optimizados -->
@@ -41,22 +42,9 @@
 
             <!-- Encabezado con botón de regreso y título bien centrado -->
             <Grid ColumnDefinitions="Auto, *, Auto">
-                <!-- Botón de regreso -->
-                <Button Text="←"
-                        FontSize="20"
-                        BackgroundColor="Transparent"
-                        TextColor="Black"
-                        Command="{Binding VolverCommand}"
-                        HorizontalOptions="Start"
-                        VerticalOptions="Center"
-                        Padding="10"/>
 
-                <!-- Título centrado -->
-                <Label Text="Registrar Vivero"
-                       Style="{StaticResource LabelTitleStyle}"
-                       Grid.Column="1"
-                       HorizontalTextAlignment="Center"
-                       VerticalTextAlignment="Center"/>
+
+               
             </Grid>
 
             <!-- Contenedor con fondo blanco y opacidad SIN afectar el contenido -->
@@ -70,11 +58,12 @@
                 <Grid>
                     <!-- Fondo con opacidad -->
                     <BoxView Color="White"
-                             Opacity="0.7"
+                             Opacity="0.6"
                              CornerRadius="30"
                              HorizontalOptions="Fill"
                              VerticalOptions="Fill"
-                             InputTransparent="True"/>
+                             InputTransparent="True"
+                             />
 
                     <!-- Contenido sin opacidad -->
                     <VerticalStackLayout Padding="20" Spacing="15">
@@ -82,8 +71,9 @@
                         <!-- Imagen -->
                         <Frame WidthRequest="150" HeightRequest="150"
                                CornerRadius="50" BorderColor="Transparent"
-                               HasShadow="False" HorizontalOptions="Center">
-                            <Image Source="invernadero.png" Aspect="AspectFill" BackgroundColor="White"/>
+                               HasShadow="False" HorizontalOptions="Center" Opacity="0.8">
+                          <Image Source="invernadero.jpg" Aspect="AspectFill"/>
+
                         </Frame>
 
                         <!-- Campo ID -->

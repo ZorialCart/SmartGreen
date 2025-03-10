@@ -65,19 +65,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<MauiXaml Update="View\GreenHouseView.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="View\AgregarInvernadero.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="View\Login.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="View\PopUpHumedad.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="View\MenuInvernaderos.xaml">
+		<MauiXaml Update="View\ViveroView\AgregarInvernadero.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="View\RecoveryPass\Recovery1.xaml">
@@ -86,14 +74,6 @@
 		<MauiXaml Update="View\RecoveryPass\Recovery2.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="View\Register.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-	</ItemGroup>
-
-
-	<ItemGroup>
-	  <Folder Include="View\ViveroView\" />
 	</ItemGroup>
 
 </Project>
