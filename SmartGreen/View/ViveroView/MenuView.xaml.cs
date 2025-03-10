@@ -6,7 +6,9 @@ public partial class MenuView : ContentPage
 	public MenuView()
 	{
 		InitializeComponent();
-        BindingContext = new VMMenuView();
+        VMMenuView vMMenuView = new VMMenuView();
+        BindingContext = vMMenuView;
+
     }
 
     private void ContentPage_NavigatedFrom(object sender, NavigatedFromEventArgs e)

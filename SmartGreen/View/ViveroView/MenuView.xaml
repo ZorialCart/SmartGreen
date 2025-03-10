@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartGreen.View.ViveroView.MenuView" 
              Shell.BackgroundColor="#545f35" Shell.FlyoutBehavior="Flyout"
-             Shell.FlyoutItemIsVisible="True"  BackgroundImageSource="hum.jpg" Opacity=".8"
+             Shell.FlyoutItemIsVisible="True"  BackgroundImageSource="hum.jpg" Opacity=".9"
              Title="Inicio" Shell.TitleColor="White" 
              >
 
@@ -12,5 +12,75 @@
                             IconOverride="menuicon.png">
         </BackButtonBehavior>
     </Shell.BackButtonBehavior>
+
+    <ScrollView>
+        <Grid>
+        <Grid>
+            <!--<Image Source="fondo.jpg"
+             Scale="1.4"
+             Opacity="0.8"
+             Aspect="AspectFill"
+             />-->
+
+            <RoundRectangle Margin="15,10,15,0"
+                      CornerRadius="30"
+                      Fill="White"
+                      Opacity="0.4"
+                      VerticalOptions="Start"
+                      HeightRequest="230"/>
+
+            <Image Source="logooff.png"
+             HeightRequest="180"
+             HorizontalOptions="Center"
+             VerticalOptions="Start"
+             Margin="0,30,0,0"/>
+        </Grid>
+
+            <CollectionView ItemsSource="{Binding Invernaderos}" Margin="0,260,0,0">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10" Margin="0,10,0,0" CornerRadius="10" BackgroundColor="White" HasShadow="True" WidthRequest="400" 
+                       HeightRequest="70">
+                            <Grid ColumnDefinitions="Auto, *, Auto">
+                                <ScrollView>
+                                    <VerticalStackLayout Spacing="20" Margin="0,0,0,0">
+                                        <Button BackgroundColor="White"
+                                            Text="{Binding Nombre}"
+                                            TextColor="Black"
+                                            HorizontalOptions="Center"
+                                            HeightRequest="50"
+                                            WidthRequest="380"
+                                            CornerRadius="30"
+                                            FontSize="Body"
+                                            FontAttributes="Bold"
+                                            />
+                                    </VerticalStackLayout>
+                                </ScrollView>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button BackgroundColor="White"
+              CornerRadius="50"
+              Padding="0"
+              Margin="0,580,25,200"
+              WidthRequest="70"
+              HeightRequest="70"
+              HorizontalOptions="End"
+              VerticalOptions="End"
+              ImageSource="btnadd.png"
+              TextColor="Black"
+             />
+
+
+        </Grid>
+
+
+        
+    </ScrollView>
+
 
 </ContentPage>
