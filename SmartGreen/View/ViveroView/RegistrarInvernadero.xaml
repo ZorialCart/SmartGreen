@@ -4,38 +4,53 @@
              x:Class="SmartGreen.View.ViveroView.RegistrarInvernadero"
              Title="RegistrarInvernadero" BackgroundImageSource="backreg.jpg"
              Shell.BackgroundColor="#545f35" Shell.FlyoutBehavior="Flyout"
-             Shell.FlyoutItemIsVisible="True"  Opacity=".9"
-             Shell.TitleColor="White" >
-    
+             Shell.FlyoutItemIsVisible="True" Opacity=".9"
+             Shell.TitleColor="White" 
+             xmlns:ViewModel="clr-namespace:SmartGreen.ViewModel">
+
+    <!-- 🔹 Enlazar ViewModel -->
+    <ContentPage.BindingContext>
+        <ViewModel:VMRegistrarInvernaderos />
+    </ContentPage.BindingContext>
+
     <VerticalStackLayout>
         <Grid RowDefinitions=".5*,.5*">
             <Grid Grid.Row="0">
-                <Frame Margin="20,70,20,-300"
-                       Opacity=".6"
-                       CornerRadius="30"                
-                       >
-                </Frame>
+                <Frame Margin="20,70,20,-300" Opacity=".6" CornerRadius="30" />
                 <Frame CornerRadius="100" Margin="120,150,120,120" BorderColor="White">
                     <Image Source="plant.jpg" Scale=".9" />
                 </Frame>
             </Grid>
 
             <Grid Grid.Row="1">
-
                 <Grid Margin="30,-220,30,0">
-                    <Entry Placeholder="ID" HeightRequest="40" FontSize="18" TextColor="Black" PlaceholderColor="Gray" 
-                           Keyboard="Text"  Margin="0,0,170,0"/>
-                    <Entry Placeholder="Nombre" HeightRequest="40" FontSize="18" TextColor="black" PlaceholderColor="Gray" Keyboard="Text" Margin="0,100,0,-10"/>
-                    <Entry Placeholder="Descripción" HeightRequest="200" FontSize="18"  TextColor="black" PlaceholderColor="Gray" Keyboard="Text" Margin="0,200,0,-10"/>
+                    <!-- 🔹 ID con binding -->
+                    <Entry Placeholder="ID" HeightRequest="40" FontSize="18" 
+                           TextColor="Black" PlaceholderColor="Gray" Keyboard="Text"
+                           Text="{Binding IdInvernadero, Mode=TwoWay}"
+                           Margin="0,0,170,0"/>
+
+                    <!-- 🔹 Nombre y descripción con binding -->
+                    <Entry Placeholder="Nombre" HeightRequest="40" FontSize="18" 
+                           TextColor="black" PlaceholderColor="Gray" Keyboard="Text"
+                           Text="{Binding NombreInvernadero, Mode=TwoWay}"
+                           Margin="0,100,0,-10"/>
+
+                    <Entry Placeholder="Descripción" HeightRequest="200" FontSize="18"  
+                           TextColor="black" PlaceholderColor="Gray" Keyboard="Text"
+                           Text="{Binding Descripcion, Mode=TwoWay}"
+                           Margin="0,200,0,-10"/>
                 </Grid>
+
                 <Grid Margin="100,280,100,0">
-                    <Button Text="Guardar" FontSize="18"  HeightRequest="50" CornerRadius="30" BackgroundColor="#5d8832"/>
+                    <Button Text="Guardar" Command="{Binding RegistrarInvernaderoCommand}" 
+                            FontSize="18" HeightRequest="50" CornerRadius="30" BackgroundColor="#5d8832"/>
                 </Grid>
                 <Grid Margin="100,400,100,0">
-                    <Button Text="Cancelar" FontSize="18"  HeightRequest="50" CornerRadius="30" BackgroundColor="#b2b0a8"/>
+                    <Button Text="Cancelar" Command="{Binding VolverCommand}"
+                            FontSize="18" HeightRequest="50" CornerRadius="30" BackgroundColor="#b2b0a8"/>
                 </Grid>
             </Grid>
         </Grid>
-
     </VerticalStackLayout>
 </ContentPage>
