@@ -24,7 +24,7 @@
                    Text="Iniciar sesión" VerticalOptions="Center"
                    HorizontalOptions="Center"
                    TextColor="#508029" Margin="0,190,0,0"/>
-                <Label Text="Ingresa con tus datos para continuar." FontFamily="bold" 
+                <Label Text="¡Bienvenido! Ingresa tus datos para continuar."  FontFamily="bold" 
                        FontSize="17" Margin="0,315,0,0"
                        HorizontalOptions="Center" TextColor="#777965"/>
             </Grid>

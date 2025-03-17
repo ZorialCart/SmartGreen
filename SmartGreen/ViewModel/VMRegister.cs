@@ -277,7 +277,7 @@ namespace SmartGreen.ViewModel
 
         public async Task BackToLogin()
         {
-            await Shell.Current.GoToAsync($"/{nameof(Login)}");
+            await Shell.Current.Navigation.PopAsync();
         }
 
 

@@ -16,7 +16,8 @@ namespace SmartGreen.ViewModel
 
         public async Task ReturnToLogin()
         {
-            await Shell.Current.GoToAsync($"/{nameof(Login)}");
+            //await Shell.Current.GoToAsync($"/{nameof(Login)}");
+            await Shell.Current.Navigation.PopAsync();
         }
 
         public async Task ToRecovery2()
