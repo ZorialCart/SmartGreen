@@ -77,11 +77,9 @@
 	  <MauiXaml Update="View\Register.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Clases\" />
-	  <Folder Include="View\ViveroView\" />
+	  <MauiXaml Update="View\ViveroView\RegistrarInvernadero.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

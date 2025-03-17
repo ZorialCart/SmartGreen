@@ -15,6 +15,9 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Net.Http.Json;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Maui.Controls;
+using SmartGreen.Clases;
+
 
 namespace SmartGreen.ViewModel
 {
@@ -151,9 +154,21 @@ namespace SmartGreen.ViewModel
                     if (response.IsSuccessStatusCode)
                     {
                         string token = await response.Content.ReadAsStringAsync();
-                        await SecureStorage.SetAsync("token", token);
+                        await AuthService.SaveTokenAsync(token);
                         IsLoggedIn = true;
-                        await Shell.Current.GoToAsync("MenuView", true);
+                        if (Shell.Current.Navigation.NavigationStack.Count > 1)
+                        {
+                            // Si hay más de una página en la pila de navegación, eliminamos la página de login
+                            var loginPage = Shell.Current.Navigation.NavigationStack.FirstOrDefault(p => p is Login);
+                            if (loginPage != null)
+                            {
+                                Shell.Current.Navigation.RemovePage(loginPage); // Elimina LoginPage de la pila
+                            }
+                        }
+
+                        // Navegar a la página del menú principal
+                        await Shell.Current.GoToAsync("//MenuView");
+
                     }
                     else
                     {
@@ -173,12 +188,11 @@ namespace SmartGreen.ViewModel
         {
             try
             {
-                await SecureStorage.SetAsync("token", string.Empty);
+                await AuthService.LogOutAsync();
                 IsLoggedIn = false;
-                //await Shell.Current.GoToAsync("MenuView"); //Limpia la pila de navegacion
-                await Shell.Current.Navigation.PopToRootAsync();
 
-                await Shell.Current.GoToAsync("Login");
+                Application.Current.MainPage = new NavigationPage(new Login());
+
             }
             catch (Exception ex)
             {
@@ -187,15 +201,11 @@ namespace SmartGreen.ViewModel
 
         }
 
+
         public async Task SingUp()
         {
             await Shell.Current.GoToAsync($"/{nameof(Register)}");
         }
-
-        //public async Task GoTo()
-        //{
-        //    await Shell.Current.GoToAsync($"/{nameof(MenuView)}");
-        //}
 
         public async Task RecoveryP()
         {
@@ -204,7 +214,6 @@ namespace SmartGreen.ViewModel
         #endregion
 
         #region COMMANDS
-        //public ICommand ToMenu => new Command(async () => await Login());
         public ICommand LoginCommand => new Command(() =>  Login());
         public ICommand ToSingUp => new Command(async () => await SingUp());
         public ICommand ToRecovery => new Command(async () => await RecoveryP());
