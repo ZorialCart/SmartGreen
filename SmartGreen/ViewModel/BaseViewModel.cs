@@ -12,7 +12,9 @@ namespace SmartGreen.ViewModel
         public class BaseViewModel : INotifyPropertyChanged
         {
 
-            public event PropertyChangedEventHandler PropertyChanged;
+        public INavigation Navigation;
+
+        public event PropertyChangedEventHandler PropertyChanged;
             public void OnpropertyChanged([CallerMemberName] string nombre = "")
             {
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nombre));
