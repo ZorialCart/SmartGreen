@@ -13,44 +13,54 @@
         <ViewModel:VMRegistrarInvernaderos />
     </ContentPage.BindingContext>
 
-    <VerticalStackLayout>
-        <Grid RowDefinitions=".5*,.5*">
-            <Grid Grid.Row="0">
-                <Frame Margin="20,70,20,-300" Opacity=".6" CornerRadius="30" />
-                <Frame CornerRadius="100" Margin="120,150,120,120" BorderColor="White">
-                    <Image Source="plant.jpg" Scale=".9" />
-                </Frame>
-            </Grid>
+    <VerticalStackLayout Padding="20">
+        <!-- Contenedor de la Imagen -->
+        <Grid>
+            <!-- 🔹 Fondo semitransparente -->
+            <Frame Margin="20,50,20,0" Opacity=".6" CornerRadius="30"
+                   BackgroundColor="LightGray"
+                   InputTransparent="True"/>
+            <!-- Hace que el fondo no bloquee interacción -->
 
-            <Grid Grid.Row="1">
-                <Grid Margin="30,-220,30,0">
-                    <!-- 🔹 ID con binding -->
-                    <Entry Placeholder="ID" HeightRequest="40" FontSize="18" 
-                           TextColor="Black" PlaceholderColor="Gray" Keyboard="Text"
-                           Text="{Binding IdInvernadero, Mode=TwoWay}"
-                           Margin="0,0,170,0"/>
+            <!-- 🔹 Imagen centrada -->
+            <Frame CornerRadius="100" Margin="120,100,120,0" BorderColor="White"
+                   HasShadow="False" BackgroundColor="Transparent"
+                   InputTransparent="True">
+                <Image Source="plant.jpg" Scale=".9"/>
+            </Frame>
+        </Grid>
 
-                    <!-- 🔹 Nombre y descripción con binding -->
-                    <Entry Placeholder="Nombre" HeightRequest="40" FontSize="18" 
-                           TextColor="black" PlaceholderColor="Gray" Keyboard="Text"
-                           Text="{Binding NombreInvernadero, Mode=TwoWay}"
-                           Margin="0,100,0,-10"/>
+        <!-- 🔹 Formulario -->
+        <Grid Padding="30,10,30,10" RowDefinitions="Auto,Auto,Auto,Auto">
 
-                    <Entry Placeholder="Descripción" HeightRequest="200" FontSize="18"  
-                           TextColor="black" PlaceholderColor="Gray" Keyboard="Text"
-                           Text="{Binding Descripcion, Mode=TwoWay}"
-                           Margin="0,200,0,-10"/>
-                </Grid>
+            <!-- ID -->
+            <Entry Placeholder="ID" HeightRequest="40" FontSize="18"
+                   TextColor="Black" PlaceholderColor="Gray" Keyboard="Text"
+                   Text="{Binding IdInvernadero, Mode=TwoWay}"
+                   Grid.Row="0"/>
 
-                <Grid Margin="100,280,100,0">
-                    <Button Text="Guardar" Command="{Binding RegistrarInvernaderoCommand}" 
-                            FontSize="18" HeightRequest="50" CornerRadius="30" BackgroundColor="#5d8832"/>
-                </Grid>
-                <Grid Margin="100,400,100,0">
-                    <Button Text="Cancelar" Command="{Binding VolverCommand}"
-                            FontSize="18" HeightRequest="50" CornerRadius="30" BackgroundColor="#b2b0a8"/>
-                </Grid>
-            </Grid>
+            <!-- Nombre -->
+            <Entry Placeholder="Nombre" HeightRequest="40" FontSize="18"
+                   TextColor="Black" PlaceholderColor="Gray" Keyboard="Text"
+                   Text="{Binding NombreInvernadero, Mode=TwoWay}"
+                   Grid.Row="1" Margin="0,10,0,0"/>
+
+            <!-- Descripción -->
+            <Editor Placeholder="Descripción" HeightRequest="100" FontSize="18"  
+                    TextColor="Black" PlaceholderColor="Gray" Keyboard="Text"
+                    Text="{Binding Descripcion, Mode=TwoWay}"
+                    Grid.Row="2" Margin="0,10,0,0"/>
+
+            <!-- Botones -->
+            <VerticalStackLayout Spacing="10" Margin="0,20,0,0" Grid.Row="3">
+                <Button Text="Guardar" Command="{Binding RegistrarInvernaderoCommand}"
+                        FontSize="18" HeightRequest="50" CornerRadius="30"
+                        BackgroundColor="#5d8832"/>
+
+                <Button Text="Cancelar" Command="{Binding VolverCommand}"
+                        FontSize="18" HeightRequest="50" CornerRadius="30"
+                        BackgroundColor="#b2b0a8"/>
+            </VerticalStackLayout>
         </Grid>
     </VerticalStackLayout>
 </ContentPage>

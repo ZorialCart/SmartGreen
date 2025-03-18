@@ -23,7 +23,7 @@ namespace SmartGreen.ViewModel
         private string _msgDescripcion;
         private bool _idDisponible = true;
         private bool _sumit;
-        private readonly string correo = "alex@gmail.com";
+        private readonly string correo = "alex@gmail.com";  // Simulación de usuario autenticado
         private readonly HttpClient _cliente = new HttpClient();
         private readonly string apiUrl = "https://934vm7pw-5062.usw3.devtunnels.ms/api/Invernadero";
 
@@ -136,7 +136,7 @@ namespace SmartGreen.ViewModel
 
         public VMRegistrarInvernaderos()
         {
-            
+
         }
 
         #endregion
@@ -155,18 +155,26 @@ namespace SmartGreen.ViewModel
 
             try
             {
-                var response = await _cliente.GetAsync($"{apiUrl}/Find/{IdInvernadero}");
+                // Verificar si el invernadero ya tiene un correo registrado
+                var response = await _cliente.GetAsync($"{apiUrl}/FindByEmail/{correo}");
 
                 if (response.IsSuccessStatusCode)
                 {
-                    // ID ya en uso, no permitir registro
-                    MsgId = "Esta ID ya está en uso.";
-                    IdDisponible = false;
-                }
-                else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
-                {
-                    // ID disponible, permitir registro
-                    IdDisponible = true;
+                    var jsonResponse = await response.Content.ReadAsStringAsync();
+                    var invernaderosUsuario = JsonConvert.DeserializeObject<List<InvernaderoModel>>(jsonResponse);
+
+                    // Buscar si el ID ingresado ya está asignado a alguien
+                    var invernaderoExistente = invernaderosUsuario?.Find(i => i.idInvernadero == IdInvernadero);
+
+                    if (invernaderoExistente != null)
+                    {
+                        MsgId = "Este invernadero ya está registrado por otro usuario.";
+                        IdDisponible = false;
+                    }
+                    else
+                    {
+                        IdDisponible = true;
+                    }
                 }
                 else
                 {
@@ -193,9 +201,9 @@ namespace SmartGreen.ViewModel
                 MsgId = "El ID del invernadero no puede estar vacío.";
                 Sumit = false;
             }
-            else if (IdDisponible)
+            else if (!IdDisponible)
             {
-                MsgId = "Esta ID ya está en uso.";
+                MsgId = "Este invernadero ya está registrado por otro usuario.";
                 Sumit = false;
             }
 
@@ -223,12 +231,11 @@ namespace SmartGreen.ViewModel
                 nombreInvernadero = NombreInvernadero.Trim(),
                 usuCorreo = correo,
                 descripcion = Descripcion.Trim(),
-                tipoInvernadero = 1  // Tipo de invernadero (se puede ajustar según la lógica de tu aplicación)
+                tipoInvernadero = 1
             };
 
             try
             {
-                // Enviar solicitud PUT para mover el invernadero a este usuario
                 string json = JsonConvert.SerializeObject(inverModel);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
