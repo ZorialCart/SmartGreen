@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" Shell.NavBarIsVisible="False" Shell.FlyoutBehavior="Disabled"
-             x:Class="SmartGreen.View.RecoveryPass.Recovery1" BackgroundImageSource="hum.jpg" Opacity=".9"
-             Title="Recovery1">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartGreen.View.RecoveryPass.Recovery2" BackgroundImageSource="hum.jpg" Opacity=".9"
+             Shell.FlyoutBehavior="Disabled" Shell.NavBarIsVisible="False"  Shell.FlyoutItemIsVisible="False"
+             Title="Recovery2">
     <VerticalStackLayout>
         <Grid RowDefinitions="Auto, Auto, Auto, *">
             <!-- Fondo blanco redondeado -->
@@ -14,32 +15,28 @@
             </Grid>
 
             <Grid Grid.Row="1">
-                <Image Source="logooff.png" Scale=".8" Margin="0,90,0,100"/>
+                <Image Source="logooff.png" Scale=".8" Margin="0,100,0,100"/>
                 <Label FontAttributes="Bold" FontFamily="bold"
                    FontSize="28"
                    Text="Recuperar contraseña" VerticalOptions="Center"
                    HorizontalOptions="Center"
                    TextColor="#508029" Margin="0,210,0,0"/>
-                <Label Text="Introduce tu correo vinculado a la cuenta para recuperar tu contraseña." FontFamily="bold" 
+                <Label Text="Por favor, ingresa una nueva contraseña que sea segura y fácil de recordar." FontFamily="bold" 
                        FontSize="17" Margin="30,355,30,60"
                        HorizontalOptions="Center" TextColor="#777965"/>
             </Grid>
 
             <!-- Campos de entrada -->
             <Grid Grid.Row="2" Margin="30,-40,30,0">
-                <Entry Placeholder="Correo" HeightRequest="40" FontSize="18" TextColor="Black" Keyboard="Email" PlaceholderColor="Gray"/>
+                <Entry Placeholder="Nueva contraseña" HeightRequest="40" FontSize="18" TextColor="Black" IsPassword="True" PlaceholderColor="Gray"/>
+            </Grid>
+            <Grid Grid.Row="3" Margin="30,-50,30,0">
+                <Entry Placeholder="Confirmar nueva contraseña" HeightRequest="40" FontSize="18" TextColor="Black" IsPassword="True" PlaceholderColor="Gray"/>
             </Grid>
 
             <!-- Botones -->
-            <Grid Grid.Row="4" Margin="100,0,100,30">
-                <Button Text="Enviar correo" BackgroundColor="#508029" TextColor="White" HeightRequest="40"
-                        Command="{Binding ToRecov2}"
-                    CornerRadius="25" HorizontalOptions="FillAndExpand" FontSize="16" FontAttributes="Bold"/>
-            </Grid>
-
-            <Grid Grid.Row="5" Margin="100,70,100,0">
-                <Button Text="Cancelar" BackgroundColor="#b2b0a8" TextColor="White" HeightRequest="40"
-                        Command="{Binding ReturnLogIn}"
+            <Grid Grid.Row="4" Margin="100,70,100,0">
+                <Button Text="Confirmar" BackgroundColor="#508029" TextColor="White" HeightRequest="40"
                     CornerRadius="25" HorizontalOptions="FillAndExpand" FontSize="16" FontAttributes="Bold" />
             </Grid>
         </Grid>
