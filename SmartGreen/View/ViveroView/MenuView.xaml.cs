@@ -6,7 +6,7 @@ public partial class MenuView : ContentPage
 	public MenuView()
 	{
 		InitializeComponent();
-        VMMenuView vMMenuView = new VMMenuView();
+        VMMenuView vMMenuView = new VMMenuView(Navigation);
         BindingContext = vMMenuView;
 
     }
@@ -15,4 +15,16 @@ public partial class MenuView : ContentPage
     {
 
     }
+
+    private async void Button_Clicked(object sender, EventArgs e)
+    {
+        
+
+    }
+    private async void AddGreenHouse_Clicked(object sender, EventArgs e)
+    {
+
+
+    }
+
 }

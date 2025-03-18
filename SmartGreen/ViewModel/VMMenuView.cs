@@ -25,5 +25,18 @@ namespace SmartGreen.ViewModel
             // Abre el menú del Flyout
             Shell.Current.FlyoutIsPresented = true;
         }
+
+        public VMMenuView(INavigation navigation)
+        {
+            Navigation = navigation;
+            // Simulación de datos; aquí conectarías con tu base de datos
+            Invernaderos = new ObservableCollection<ModelViveros>
+    {
+    new ModelViveros { Nombre = "Invernadero Squish" },
+    new ModelViveros { Nombre = "Invernadero Orquidea"},
+
+    };
+        }
     }
+
 }
