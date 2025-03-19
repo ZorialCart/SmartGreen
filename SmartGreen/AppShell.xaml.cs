@@ -20,6 +20,7 @@ namespace SmartGreen
             Routing.RegisterRoute("Recovery1", typeof (Recovery1));
             Routing.RegisterRoute("Recovery2", typeof(Recovery2));
 
+
             if(!UserIsLoggedIn())
             {
                 GoToAsync("Login", true);

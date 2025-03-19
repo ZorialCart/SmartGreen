@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SmartGreen.Model;
+using SmartGreen.View.ViveroView;
 
 namespace SmartGreen.ViewModel
 {
@@ -25,5 +26,29 @@ namespace SmartGreen.ViewModel
             // Abre el menú del Flyout
             Shell.Current.FlyoutIsPresented = true;
         }
+
+        public VMMenuView(INavigation navigation)
+        {
+            Navigation = navigation;
+            // Simulación de datos; aquí conectarías con tu base de datos
+            Invernaderos = new ObservableCollection<ModelViveros>
+            {
+            new ModelViveros { Nombre = "Invernadero Squish" },
+            new ModelViveros { Nombre = "Invernadero Orquidea"},
+
+            };
+        }
+
+        public async Task ToRegisterInv()
+        {
+            await Shell.Current.Navigation.PushAsync(new RegistrarInvernadero());
+        }
+
+
+        #region COMMANDS
+
+        public ICommand GotToInv => new Command(async () => await ToRegisterInv());
+        #endregion
     }
+
 }

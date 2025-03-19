@@ -130,6 +130,8 @@ namespace SmartGreen.ViewModel
 
         public async void Login()
         {
+            await Shell.Current.GoToAsync("//MenuView");
+            /*
             Validation();
 
             if (!Sumit) return;
@@ -180,7 +182,7 @@ namespace SmartGreen.ViewModel
             catch (Exception ex)
             {
                 Console.WriteLine("Error en la conexión: " + ex.Message);
-            }
+            }*/
         }
 
 
