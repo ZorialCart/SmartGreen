@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartGreen.View.ViveroView.MenuView" 
              Shell.BackgroundColor="#545f35" Shell.FlyoutBehavior="Flyout"
-             Shell.FlyoutItemIsVisible="True"  BackgroundImageSource="hum.jpg" Opacity=".9"
+             Shell.FlyoutItemIsVisible="True"  
              Title="Inicio" Shell.TitleColor="White" 
              >
 
@@ -15,17 +15,16 @@
 
     <Grid>
         <Grid>
-            <Image Source="fondo.jpg"
-           Scale="1.4"
-           Opacity="0.8"
-           Aspect="AspectFill"
-           HorizontalOptions="FillAndExpand"
-           VerticalOptions="FillAndExpand"/>
-
+            <Image Source="b.jpg"
+                Scale="1"
+                Opacity="0.9"
+                Aspect="AspectFill"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"/>
             <RoundRectangle Margin="15,10,15,0"
                     CornerRadius="30"
                     Fill="White"
-                    Opacity="0.4"
+                    Opacity="0.7"
                     VerticalOptions="Start"
                     HeightRequest="230"/>
 
@@ -39,25 +38,25 @@
 
 
 
-        <CollectionView ItemsSource="{Binding Invernaderos}" Margin="0,260,0,0">
+        <CollectionView ItemsSource="{Binding Invernaderos}" Margin="30,260,30,0">
 
-            <CollectionView.ItemTemplate>
+            <CollectionView.ItemTemplate >
                 <DataTemplate>
-                    <Frame Padding="10" Margin="0,10,0,0" CornerRadius="10" BackgroundColor="White" HasShadow="True" WidthRequest="400" 
+                    <Frame Padding="10" Margin="0,10,0,0" CornerRadius="10"  BackgroundColor="White" HasShadow="True" WidthRequest="400" 
                        HeightRequest="70">
-                        <Grid ColumnDefinitions="Auto, *, Auto">
+                        <Grid ColumnDefinitions="Auto, *, Auto" >
                             <ScrollView>
-                                <VerticalStackLayout Spacing="20" Margin="0,0,0,0">
+                                <VerticalStackLayout Spacing="20" Margin="0,0,0,0" >
                                     <Button BackgroundColor="White"
-                Text="{Binding Nombre}"
-                TextColor="Black"
-                HorizontalOptions="Center"
-                HeightRequest="50"
-                WidthRequest="380"
-                CornerRadius="30"
-                FontSize="Body"
-                FontAttributes="Bold"
-                Clicked="Button_Clicked"/>
+                                        Text="{Binding Nombre}"
+                                        TextColor="Black"
+                                        HorizontalOptions="Center"
+                                        HeightRequest="50"
+                                        WidthRequest="380"
+                                        CornerRadius="30"
+                                        FontSize="Body"
+                                        FontAttributes="Bold"
+                                        Clicked="Button_Clicked"/>
                                 </VerticalStackLayout>
                             </ScrollView>
                         </Grid>
@@ -68,15 +67,16 @@
 
         <Button BackgroundColor="White"
          x:Name="AddGreenHouse"
-         CornerRadius="20"
-         Padding="5"
-         WidthRequest="50"
-         HeightRequest="50"
+         CornerRadius="50"
+         Padding="-1"
+         WidthRequest="70"
+         HeightRequest="70"
          HorizontalOptions="End"
          VerticalOptions="End"
-         Margin="20"
-         ImageSource="add.png"
+         Margin="0,20,20,70"
+         ImageSource="btnadd.png"
          TextColor="Black"
+         Command="{Binding GotToInv}"
              />
     </Grid>
 
