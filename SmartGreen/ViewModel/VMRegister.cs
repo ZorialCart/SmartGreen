@@ -13,7 +13,8 @@ namespace SmartGreen.ViewModel
 {
     internal class VMRegister : BaseViewModel
     {
-        public VMRegister() {
+        public VMRegister()
+        {
         }
         #region VARIABLES
         private string _nombre;
@@ -46,7 +47,8 @@ namespace SmartGreen.ViewModel
         public string Correo
         {
             get => _correo;
-            set {
+            set
+            {
                 if (_correo != value)
                 {
                     _correo = value;
@@ -57,7 +59,8 @@ namespace SmartGreen.ViewModel
         public string Celular
         {
             get => _celular;
-            set {
+            set
+            {
                 if (_celular != value)
                 {
                     _celular = value;
@@ -69,10 +72,11 @@ namespace SmartGreen.ViewModel
         public string Password
         {
             get => _password;
-            set { 
-                if(_password != value)
+            set
+            {
+                if (_password != value)
                 {
-                    _password = value;  
+                    _password = value;
                     OnpropertyChanged(nameof(Password));
                 }
             }
@@ -89,8 +93,8 @@ namespace SmartGreen.ViewModel
         {
             get => _confirmPass;
             set
-            { 
-                if(_confirmPass != value)
+            {
+                if (_confirmPass != value)
                 {
                     _confirmPass = value;
                     OnpropertyChanged(nameof(ConfirmPass));
@@ -101,7 +105,7 @@ namespace SmartGreen.ViewModel
         public string PassMistake
         {
             get => _passMistake;
-            set { SetValue(ref _passMistake, value);}
+            set { SetValue(ref _passMistake, value); }
         }
 
         public string ConfirmPassMistake
@@ -119,7 +123,7 @@ namespace SmartGreen.ViewModel
         public string MsgEmail
         {
             get => _msgEmail;
-            set { SetValue(ref _msgEmail, value);}
+            set { SetValue(ref _msgEmail, value); }
         }
 
         public string MsgCelular
@@ -136,7 +140,7 @@ namespace SmartGreen.ViewModel
 
         #endregion
 
-        public async Task<bool>FindByEmail(string correo)
+        public async Task<bool> FindByEmail(string correo)
         {
             using (var cliente = new HttpClient())
             {
@@ -166,7 +170,7 @@ namespace SmartGreen.ViewModel
                 }
 
             }
-                
+
         }
 
         public async void Validate()
@@ -254,7 +258,7 @@ namespace SmartGreen.ViewModel
                 {
                     string json = JsonSerializer.Serialize(userModel);
                     var content = new StringContent(json, Encoding.UTF8, "application/json");
-                    var respuesta = await cliente.PostAsync("https://934vm7pw-5062.usw3.devtunnels.ms/api/User/Register", content); 
+                    var respuesta = await cliente.PostAsync("https://934vm7pw-5062.usw3.devtunnels.ms/api/User/Register", content);
 
                     if (respuesta.IsSuccessStatusCode)
                     {
@@ -267,7 +271,8 @@ namespace SmartGreen.ViewModel
                         Console.WriteLine($"Error en la respuesta: {respuesta.StatusCode}, {errorResponse}");
                     }
                 }
-                catch (Exception ex) {
+                catch (Exception ex)
+                {
                     Console.WriteLine($"Error en la solicitud: {ex.Message}");
                 }
 

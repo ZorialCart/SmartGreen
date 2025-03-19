@@ -204,12 +204,12 @@ namespace SmartGreen.ViewModel
 
         public async Task SingUp()
         {
-            await Shell.Current.GoToAsync($"/{nameof(Register)}");
+            await Shell.Current.Navigation.PushAsync(new Register());
         }
 
         public async Task RecoveryP()
         {
-            await Shell.Current.GoToAsync($"/{nameof(Recovery1)}");
+            await Shell.Current.Navigation.PushAsync(new Recovery1());
         }
         #endregion
 
