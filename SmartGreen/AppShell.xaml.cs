@@ -19,6 +19,7 @@ namespace SmartGreen
             Routing.RegisterRoute("Register", typeof(Register));
             Routing.RegisterRoute("Recovery1", typeof (Recovery1));
             Routing.RegisterRoute("Recovery2", typeof(Recovery2));
+            Routing.RegisterRoute("RegistrarInvernadero", typeof(RegistrarInvernadero));
 
 
             if(!UserIsLoggedIn())

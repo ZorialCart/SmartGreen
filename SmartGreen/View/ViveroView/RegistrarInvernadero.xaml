@@ -4,7 +4,7 @@
              x:Class="SmartGreen.View.ViveroView.RegistrarInvernadero"
              Title="RegistrarInvernadero" BackgroundImageSource="backreg.jpg"
              Shell.BackgroundColor="#545f35" Shell.FlyoutBehavior="Flyout"
-             Shell.FlyoutItemIsVisible="True"  Opacity=".9"
+             Shell.FlyoutItemIsVisible="True"  Opacity=".9"   Shell.ForegroundColor="White"
              Shell.TitleColor="White" >
     
     <VerticalStackLayout>
