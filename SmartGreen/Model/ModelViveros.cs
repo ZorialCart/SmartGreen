@@ -8,6 +8,8 @@ namespace SmartGreen.Model
 {
     public class ModelViveros
     {
-        public string? Nombre { get; set; }
+       
+        public string? nombreInvernadero { get; set; }
+       
     }
 }

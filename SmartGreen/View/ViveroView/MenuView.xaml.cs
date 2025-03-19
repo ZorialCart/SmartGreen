@@ -6,7 +6,7 @@ public partial class MenuView : ContentPage
 	public MenuView()
 	{
 		InitializeComponent();
-        VMMenuView vMMenuView = new VMMenuView(Navigation);
+        VMMenuView vMMenuView = new VMMenuView();
         BindingContext = vMMenuView;
 
     }
