@@ -130,8 +130,7 @@ namespace SmartGreen.ViewModel
 
         public async void Login()
         {
-            await Shell.Current.GoToAsync("//MenuView");
-            /*
+          
             Validation();
 
             if (!Sumit) return;
@@ -151,24 +150,23 @@ namespace SmartGreen.ViewModel
                 using (HttpClient client = new HttpClient())
                 {
 
-                    var response = await client.PostAsJsonAsync(url, requestLogin); // POST sin cuerpo
+                    var response = await client.PostAsJsonAsync(url, requestLogin); 
 
                     if (response.IsSuccessStatusCode)
                     {
                         string token = await response.Content.ReadAsStringAsync();
                         await AuthService.SaveTokenAsync(token);
+                        await AuthService.SaveEmail(Username);
                         IsLoggedIn = true;
                         if (Shell.Current.Navigation.NavigationStack.Count > 1)
                         {
-                            // Si hay más de una página en la pila de navegación, eliminamos la página de login
                             var loginPage = Shell.Current.Navigation.NavigationStack.FirstOrDefault(p => p is Login);
                             if (loginPage != null)
                             {
-                                Shell.Current.Navigation.RemovePage(loginPage); // Elimina LoginPage de la pila
+                                Shell.Current.Navigation.RemovePage(loginPage);
                             }
                         }
 
-                        // Navegar a la página del menú principal
                         await Shell.Current.GoToAsync("//MenuView");
 
                     }
@@ -182,7 +180,7 @@ namespace SmartGreen.ViewModel
             catch (Exception ex)
             {
                 Console.WriteLine("Error en la conexión: " + ex.Message);
-            }*/
+            }
         }
 
 

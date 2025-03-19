@@ -3,9 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartGreen.View.ViveroView.MenuView" 
              Shell.BackgroundColor="#545f35" Shell.FlyoutBehavior="Flyout"
-             Shell.FlyoutItemIsVisible="True"  Shell.BackgroundColor="White
-             Title="Inicio" Shell.TitleColor="White" 
-             >
+             Shell.FlyoutItemIsVisible="True" 
+             Title="Inicio" Shell.TitleColor="White"        >
 
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="True" IsVisible="True" Command="{Binding OpenFlyoutCommand}"

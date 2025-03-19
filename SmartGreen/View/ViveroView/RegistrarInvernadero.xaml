@@ -4,38 +4,55 @@
              x:Class="SmartGreen.View.ViveroView.RegistrarInvernadero"
              Title="RegistrarInvernadero" BackgroundImageSource="backreg.jpg"
              Shell.BackgroundColor="#545f35" Shell.FlyoutBehavior="Flyout"
-             Shell.FlyoutItemIsVisible="True"  Opacity=".9"   Shell.ForegroundColor="White"
+             Shell.FlyoutItemIsVisible="True"  Opacity=".9" Shell.ForegroundColor="white"
              Shell.TitleColor="White" >
-    
+
     <VerticalStackLayout>
-        <Grid RowDefinitions=".5*,.5*">
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto">
             <Grid Grid.Row="0">
-                <Frame Margin="20,70,20,-300"
+                <Frame Margin="20,50,20,-420"
                        Opacity=".6"
-                       CornerRadius="30"                
-                       >
+                       CornerRadius="30">
                 </Frame>
-                <Frame CornerRadius="100" Margin="120,150,120,120" BorderColor="White">
+                <Frame CornerRadius="100" Margin="120,80,120,20" BorderColor="White">
                     <Image Source="plant.jpg" Scale=".9" />
                 </Frame>
             </Grid>
 
-            <Grid Grid.Row="1">
-
-                <Grid Margin="30,-220,30,0">
-                    <Entry Placeholder="ID" HeightRequest="40" FontSize="18" TextColor="Black" PlaceholderColor="Gray" 
-                           Keyboard="Text"  Margin="0,0,170,0"/>
-                    <Entry Placeholder="Nombre" HeightRequest="40" FontSize="18" TextColor="black" PlaceholderColor="Gray" Keyboard="Text" Margin="0,100,0,-10"/>
-                    <Entry Placeholder="Descripción" HeightRequest="200" FontSize="18"  TextColor="black" PlaceholderColor="Gray" Keyboard="Text" Margin="0,200,0,-10"/>
+            <!-- Formulario -->
+            <Grid Grid.Row="1" Padding="30,0,30,20" RowDefinitions="Auto,Auto,Auto,Auto">
+                <!-- ID -->
+                <Grid Grid.Row="0" Margin="0,-10,0,-10">      
+                    <Entry Placeholder="ID" HeightRequest="40" FontSize="18"  Margin="0,0,120,0"
+                      TextColor="Black" PlaceholderColor="Gray" Keyboard="Text"
+                      Text="{Binding IdInvernadero, Mode=TwoWay}" />
+                    <Label Text="{Binding MsgId}" Margin="5,45,0,0"  TextColor="Red"/>
                 </Grid>
-                <Grid Margin="100,280,100,0">
-                    <Button Text="Guardar" FontSize="18"  HeightRequest="50" CornerRadius="30" BackgroundColor="#5d8832"/>
+                <!-- Nombre -->
+                <Grid  Grid.Row="1" >
+                    <Entry Placeholder="Nombre" HeightRequest="40" FontSize="18"
+                      TextColor="Black" PlaceholderColor="Gray" Keyboard="Text"
+                      Text="{Binding NombreInvernadero, Mode=TwoWay}"/>
+                    <Label Text="{Binding MsgNombre}" Margin="5,50,0,0"  TextColor="Red"/>
                 </Grid>
-                <Grid Margin="100,400,100,0">
-                    <Button Text="Cancelar" FontSize="18"  HeightRequest="50" CornerRadius="30" BackgroundColor="#b2b0a8"/>
+                <!-- Descripción -->
+                <Grid Grid.Row="2" Margin="0,-20,0,0">
+                    <Editor Placeholder="Descripción" HeightRequest="100" FontSize="18"
+                      TextColor="Black" PlaceholderColor="Gray" Keyboard="Text"
+                      Text="{Binding Descripcion, Mode=TwoWay}" />
+                    <Label Text="{Binding MsgDescripcion}" Margin="5,115,0,0"  TextColor="Red"/>
                 </Grid>
             </Grid>
-        </Grid>
 
+            <VerticalStackLayout Spacing="10" Margin="110,-10,110,0" Grid.Row="3">
+                <Button Text="Guardar" Command="{Binding RegistrarInvernaderoCommand}" FontAttributes="Bold"
+                        FontSize="18" HeightRequest="45" CornerRadius="30"
+                        BackgroundColor="#5d8832"/>
+
+                <Button Text="Cancelar" Command="{Binding VolverCommand}"
+                        FontSize="18" HeightRequest="45" CornerRadius="30" FontAttributes="Bold"
+                        BackgroundColor="#b2b0a8"/>
+            </VerticalStackLayout>
+        </Grid>
     </VerticalStackLayout>
 </ContentPage>

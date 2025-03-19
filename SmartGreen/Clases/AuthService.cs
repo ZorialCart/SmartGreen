@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Maui.ApplicationModel.Communication;
 using Microsoft.Maui.Controls;
 
 namespace SmartGreen.Clases
 {
-    public class AuthService
+    public static class AuthService
     {
         public static async Task SaveTokenAsync(string token)
         {
@@ -21,18 +22,21 @@ namespace SmartGreen.Clases
             }
         }
 
-        // Método asincrónico para obtener el token
+     
         public static async Task<string?> GetTokenAsync()
         {
-           var token = await SecureStorage.GetAsync("token");
+            var token = await SecureStorage.GetAsync("token");
             if (!string.IsNullOrWhiteSpace(token))
             {
                 return token;
             }
-            return null;
+            else
+            {
+                Console.WriteLine("No se encuentra el token.");
+                return null;
+            }
         }
 
-        // Método asincrónico para verificar si el usuario está autenticado
         public static async Task<bool> IsAuthenticatedAsync()
         {
             string token = await GetTokenAsync();
@@ -44,10 +48,32 @@ namespace SmartGreen.Clases
 
         }
 
-        // Método asincrónico para cerrar sesión y eliminar el token
         public static async Task LogOutAsync()
         {
            await SecureStorage.SetAsync("token", string.Empty);
         }
+
+
+        public static async Task SaveEmail(string correo)
+        {
+            try
+            {
+                await SecureStorage.SetAsync("correo", correo);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al guardar el correo: " + ex.Message);
+            }
+        }
+
+        public static async Task<string?> GetUserEmailAsync()
+    {
+        var correo = await SecureStorage.GetAsync("correo");
+        if (!string.IsNullOrWhiteSpace(correo))
+        {
+            return correo;
+        }
+        return null;
+    }
     }
 }
