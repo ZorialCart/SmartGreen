@@ -37,7 +37,7 @@
 
 
 
-        <CollectionView ItemsSource="{Binding Invernaderos}" Margin="30,260,30,0">
+        <CollectionView ItemsSource="{Binding Invernaderos}" Margin="30,260,30,0" x:Name="invernaderos">
 
             <CollectionView.ItemTemplate >
                 <DataTemplate>
@@ -54,6 +54,8 @@
                                         WidthRequest="380"
                                         CornerRadius="30"
                                         FontSize="Body"
+                                        Command="{Binding Source={x:Reference invernaderos}, Path=BindingContext.GoToInverStatusCommand}"
+                                        CommandParameter="{Binding .}"
                                         FontAttributes="Bold"
                                         Clicked="Button_Clicked"/>
                                 </VerticalStackLayout>

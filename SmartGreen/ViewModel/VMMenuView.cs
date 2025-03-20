@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SmartGreen.Model;
 using SmartGreen.View.ViveroView;
 using SmartGreen.Clases;
+using System.Web;
 
 namespace SmartGreen.ViewModel
 {
@@ -36,10 +37,28 @@ namespace SmartGreen.ViewModel
             await Shell.Current.Navigation.PushAsync(new RegistrarInvernadero());
         }
 
+        public async Task GoToInverStatus(string idInvernadero,string nombre, bool started)
+        {
+            await Shell.Current.GoToAsync($"GreenHouse?idInvernadero={HttpUtility.UrlEncode(idInvernadero)}&nombre={HttpUtility.UrlEncode(nombre)}&started={started}");
+        }
+
 
         #region COMMANDS
 
         public ICommand GotToInv => new Command(async () => await ToRegisterInv());
+        public ICommand GoToInverStatusCommand => new Command<ModelViveros>(async (invernadero) =>
+        {
+            // Aquí tenés acceso a TODAS las propiedades del objeto:
+            var id = invernadero.idInvernadero;
+            var nombre = invernadero.nombreInvernadero;
+            var tipo = invernadero.TipoInvernadero;
+            var humedadMin = invernadero.MinHumedad;
+            var temperaturaMax = invernadero.MaxTemperatura;
+            // y así con todo...
+
+            // Pero vos decidiste navegar solo con tres:
+            await GoToInverStatus(invernadero.idInvernadero, invernadero.nombreInvernadero, invernadero.Started);
+        });
         #endregion
 
 

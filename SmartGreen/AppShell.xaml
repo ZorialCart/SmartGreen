@@ -32,8 +32,8 @@
     
     <!--<ShellContent Title="Cuenta" Icon="cuenta.png"/>-->
 
-    <ShellItem Title="Monitorear" Icon="monitoreo.png">
-        <ShellContent/>
+    <ShellItem Title="Notificaciones" Icon="monitoreo.png">
+        <ShellContent ContentTemplate="{DataTemplate view:Notificaciones}"/>
     </ShellItem>
 
     <MenuItem Text="Salir" Command="{Binding LogOutCommand}" IconImageSource="salida.png"/>
