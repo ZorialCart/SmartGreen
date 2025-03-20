@@ -3,16 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              NavigationPage.HasNavigationBar="False"
              xmlns:views="clr-namespace:SmartGreen"
-             Shell.NavBarIsVisible="False"
-             BackgroundColor="#deebd4" BackgroundImageSource="hum.jpg" Scale="1"
-             x:Class="SmartGreen.View.GreenHouseView"
-             Title="GreenHouseView">
+             Shell.NavBarIsVisible="True"  Shell.FlyoutBehavior="Flyout" Shell.ForegroundColor="White" Shell.TitleColor="White"
+             BackgroundImageSource="hum.jpg" Scale="1"  Shell.FlyoutItemIsVisible="True" 
+             x:Class="SmartGreen.View.GreenHouseView"  Shell.BackgroundColor="#545f35"
+             Title="Monitoreo">
     <Grid>
         <Grid Grid.Row="0">
-            <RoundRectangle Margin="0,0,0,-750"
+            <RoundRectangle Margin="15,30,15,35"
                 CornerRadius="30,30,30,30"
                 Fill="White"
-                Opacity=".3"/>
+                Opacity=".6"/>
         </Grid>
 
         <ScrollView>
@@ -21,29 +21,29 @@
                  Padding="10"
                  Spacing="10">
 
-                <Label 
+                <!--<Label 
             Text="Monitoreo" TextColor="#508029"
             VerticalOptions="Center" 
             HorizontalOptions="Center" 
             Padding="0,0,0,33"
             FontSize="35"
             FontAttributes="Bold" FontFamily="bold" 
-            />
-                <Label
+            />-->
+                <!--<Label Margin="0,35,0,0"
                     Text="Invernadero:"
                     HorizontalOptions="Center"
                     FontSize="20"
-                    />
+                    />-->
                 <Label 
             Text="{Binding NombreInvernadero}" TextColor="Black"
             VerticalOptions="Center" 
             HorizontalOptions="Center" 
-            FontSize="33"
+            FontSize="24"
             FontAttributes="Bold" FontFamily="bold"
-            Padding="0,0,0,33"
+            Padding="0,50,0,20"
             />
                 <!-- Imagen de la planta -->
-                <Frame WidthRequest="200" HeightRequest="200"
+                <Frame WidthRequest="170" HeightRequest="170"
                CornerRadius="125"
                BorderColor="Transparent"
                HasShadow="False"
@@ -59,16 +59,16 @@
 
                 <Label
                     Text="{Binding Humedad, StringFormat='Humedad actual: {0}%'}" FontAttributes="Bold" FontFamily="bold"
-                    FontSize="25"
+                    FontSize="20"
                     HorizontalOptions="Start"
-                    Padding="0,22,0,0"
+                    Padding="30,22,0,0"
                     TextColor="#013220"
                 />
                 <Label
                     Text="{Binding Temperatura, StringFormat='Temperatura actual: {0}%'}" FontAttributes="Bold" FontFamily="bold"
-                    FontSize="25"
+                    FontSize="20"
                     HorizontalOptions="Start"
-                    Padding="0,22,0,0"
+                    Padding="30,22,0,0"
                     TextColor="#013220"
                 />
                 <!-- Texto del porcentaje -->
@@ -77,10 +77,10 @@
                     Text="Ajustar Parámetros" 
                     Clicked="OnOpenPopupClicked"
                     VerticalOptions="End" FontAttributes="Bold"
-                    Margin="90,20,90,20"
+                    Margin="220,20,220,20"
                     CornerRadius="25"
                     HeightRequest="50"
-                    WidthRequest="300"
+                    WidthRequest="220"
                     FontSize="20"
                     BackgroundColor="#9aa158"
                     />
@@ -90,7 +90,7 @@
                         <Label Text="{Binding EstadoFlujo}"
                                x:Name="BotonRiego"
                                FontAttributes="Bold"
-                               FontSize="19"
+                               FontSize="18"
                                HorizontalOptions="Center"
                                Padding="0,0,0,0" />
                         <Switch IsToggled="{Binding Started}"
@@ -103,13 +103,13 @@
             </StackLayout>
         </ScrollView>
         <AbsoluteLayout>
-            <Image Source="back.png"
+            <!--<Image Source="back.png"
                 WidthRequest="50" Scale=".7"
                 HorizontalOptions="Start">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding VolverCommand}" ></TapGestureRecognizer>
                 </Image.GestureRecognizers>
-            </Image>
+            </Image>-->
             <views:PopUpHumedad x:Name="Humedad"
                                 BindingContext="{Binding}"
               AbsoluteLayout.LayoutBounds="0.5,1"
