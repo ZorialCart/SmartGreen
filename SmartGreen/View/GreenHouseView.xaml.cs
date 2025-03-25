@@ -20,14 +20,17 @@ public partial class GreenHouseView : ContentPage
         InitializeComponent();
     }
 
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
 
         if (!_isBindingSet)
         {
-            BindingContext = new VMGreenHouseView(IdInvernadero, NombreInvernadero, Started);
+            var VMGreenHouseView = new VMGreenHouseView(IdInvernadero, NombreInvernadero, Started);
+            BindingContext = VMGreenHouseView;
             _isBindingSet = true;
+
+            await VMGreenHouseView.InitializeAsync();
         }
     }
 

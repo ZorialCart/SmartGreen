@@ -142,7 +142,7 @@ namespace SmartGreen.ViewModel
             };
 
             //string url = $"https://934vm7pw-5062.usw3.devtunnels.ms/api/User/Login";
-            string url = $"http://172.16.30.247:5062/api/User/Login";
+            string url = $"http://192.168.137.194:5062/api/User/Login";
 
 
 
