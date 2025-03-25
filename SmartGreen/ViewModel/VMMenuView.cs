@@ -48,16 +48,13 @@ namespace SmartGreen.ViewModel
         public ICommand GotToInv => new Command(async () => await ToRegisterInv());
         public ICommand GoToInverStatusCommand => new Command<ModelViveros>(async (invernadero) =>
         {
-            // Aquí tenés acceso a TODAS las propiedades del objeto:
             var id = invernadero.idInvernadero;
             var nombre = invernadero.nombreInvernadero;
             var tipo = invernadero.TipoInvernadero;
             var humedadMin = invernadero.MinHumedad;
             var temperaturaMax = invernadero.MaxTemperatura;
-            // y así con todo...
-
-            // Pero vos decidiste navegar solo con tres:
-            await GoToInverStatus(invernadero.idInvernadero, invernadero.nombreInvernadero, invernadero.Started);
+            
+            await GoToInverStatus(invernadero.idInvernadero!, invernadero.nombreInvernadero, invernadero.Started);
         });
         #endregion
 
@@ -222,7 +219,8 @@ namespace SmartGreen.ViewModel
             {
                 try
                 {
-                    string url = $"https://934vm7pw-5062.usw3.devtunnels.ms/api/Invernadero/FindByEmail/{correo}";
+                    //string url = $"https://934vm7pw-5062.usw3.devtunnels.ms/api/Invernadero/FindByEmail/{correo}";
+                    string url = $"http://172.16.30.247:5062/api/Invernadero/FindByEmail/{correo}";
                     var respuesta = await cliente.GetAsync(url);
 
                     string json = await respuesta.Content.ReadAsStringAsync();
