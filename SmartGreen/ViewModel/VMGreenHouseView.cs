@@ -1,5 +1,6 @@
 ﻿using SmartGreen.Clases;
 using SmartGreen.Model;
+using SmartGreen.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,9 +27,11 @@ namespace SmartGreen.ViewModel
         public string HumedadPorcentaje { get; set; } // Ejemplo del porcentaje
         public IDrawable CircularProgressDrawable { get; set; } = new CircularProgressDrawable(1f);
         private readonly InverStatusModel _invernadero;
+        private readonly SignalRService _signalRService;
 
         public VMGreenHouseView(string id, string inverNombre, bool started)
         {
+            _signalRService = new SignalRService();
             _idInvernadero = id;
             NombreInvernadero = inverNombre;
             EstadoFlujo = started ? "Apagar riego" : "Iniciar riego";
