@@ -65,7 +65,7 @@
                     TextColor="#013220"
                 />
                 <Label
-                    Text="{Binding Temperatura, StringFormat='Temperatura actual: {0}%'}" FontAttributes="Bold" FontFamily="bold"
+                    Text="{Binding Temperatura, StringFormat='Temperatura actual: {0}°'}" FontAttributes="Bold" FontFamily="bold"
                     FontSize="20"
                     HorizontalOptions="Start"
                     Padding="30,22,0,0"
