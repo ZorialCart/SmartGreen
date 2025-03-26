@@ -104,7 +104,7 @@ namespace SmartGreen.ViewModel
             using (var cliente = new HttpClient())
             {
                 //string url = $"https://934vm7pw-5062.usw3.devtunnels.ms/api/Invernadero/Find/{_idInvernadero}";
-                string url = $"http://192.168.137.194:5062/api/Invernadero/Find/{_idInvernadero}";
+                string url = $"192.168.1.11:5062/api/Invernadero/Find/{_idInvernadero}";
                 try
                 {
                     var result = await cliente.GetAsync(url);
@@ -142,7 +142,7 @@ namespace SmartGreen.ViewModel
         public async Task GetLastStatus()
         {
             //string url = $"https://934vm7pw-5062.usw3.devtunnels.ms/GetLastStatus/{_idInvernadero}";
-            string url = $"http://192.168.137.194:5062/GetLastStatus/{_idInvernadero}";
+            string url = $"http://192.168.1.11:5062/GetLastStatus/{_idInvernadero}";
 
             try
             {

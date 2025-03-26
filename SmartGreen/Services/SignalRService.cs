@@ -17,7 +17,7 @@ namespace SmartGreen.Services
         public SignalRService()
         {
             _hubconnection = new HubConnectionBuilder()
-                .WithUrl("http://192.168.137.194:5062/inverStatusHub") // Cambia la URL según sea necesario
+                .WithUrl("http://192.168.1.11:5062/inverStatusHub") // Cambia la URL según sea necesario
                 .WithAutomaticReconnect()
                 .Build();
         }
@@ -44,10 +44,13 @@ namespace SmartGreen.Services
             try
             {
                 await _hubconnection.StartAsync();
+
                 if (_hubconnection.State == HubConnectionState.Connected)
                 {
                     _isConnected = true;
                     Console.WriteLine("Conectado a SignalR correctamente.");
+
+                    await _hubconnection.InvokeAsync("SubscribeToInvernadero", IdInvernadero);
                 }
                 
             }
