@@ -36,8 +36,8 @@
 
             <!-- Botones -->
             <Grid Grid.Row="4" Margin="100,70,100,0">
-                <Button Text="Confirmar" BackgroundColor="#508029" TextColor="White" HeightRequest="40"
-                    CornerRadius="25" HorizontalOptions="FillAndExpand" FontSize="16" FontAttributes="Bold" />
+                <Button Text="Confirmar" BackgroundColor="#508029" TextColor="White" HeightRequest="44"
+                    CornerRadius="25" HorizontalOptions="FillAndExpand" FontSize="18" FontAttributes="Bold" />
             </Grid>
         </Grid>
     </VerticalStackLayout>

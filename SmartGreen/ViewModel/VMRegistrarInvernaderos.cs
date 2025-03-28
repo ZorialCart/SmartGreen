@@ -143,46 +143,6 @@ namespace SmartGreen.ViewModel
 
         #region MÉTODOS
 
-        //private async void ValidarIdInvernadero()
-        //{
-        //    MsgId = string.Empty;
-        //    string? correo = await AuthService.GetUserEmailAsync();
-
-        //    try
-        //    {
-        //        // Verificar si el invernadero ya tiene un correo registrado
-        //        var response = await _cliente.GetAsync($"{apiUrl}/FindByEmail/{correo}");
-
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            var jsonResponse = await response.Content.ReadAsStringAsync();
-        //            var invernaderosUsuario = JsonConvert.DeserializeObject<List<InvernaderoModel>>(jsonResponse);
-
-        //            // Buscar si el ID ingresado ya está asignado a alguien
-        //            var invernaderoExistente = invernaderosUsuario?.Find(i => i.idInvernadero == IdInvernadero);
-
-        //            if (invernaderoExistente != null)
-        //            {
-        //                MsgId = "Este invernadero ya está registrado por otro usuario.";
-        //                IdDisponible = false;
-        //            }
-        //            else
-        //            {
-        //                IdDisponible = true;
-        //            }
-        //        }
-        //        else
-        //        {
-        //            MsgId = "Error al verificar el ID. Inténtalo de nuevo.";
-        //            IdDisponible = false;
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MsgId = $"Error en la solicitud: {ex.Message}";
-        //        IdDisponible = false;
-        //    }
-        //}
 
         public void ValidarCampos()
         {
@@ -217,6 +177,7 @@ namespace SmartGreen.ViewModel
             Sumit = sucessfull;
         }
 
+
         public async Task RegistrarInvernadero()
         {
             ValidarCampos();
@@ -246,11 +207,23 @@ namespace SmartGreen.ViewModel
                     string json = JsonConvert.SerializeObject(inverModel);
                     var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                    var respuesta = await client.PatchAsync($"https://934vm7pw-5062.usw3.devtunnels.ms/api/Invernadero/RegistrarInvernadero", content);
-
+                    //var respuesta = await client.PatchAsync($"https://934vm7pw-5062.usw3.devtunnels.ms/api/Invernadero/RegistrarInvernadero", content);
+                    var respuesta = await client.PatchAsync($"https://h387mpbd-5062.usw3.devtunnels.ms/api/Invernadero/RegistrarInvernadero", content);
                     if (respuesta.IsSuccessStatusCode)
                     {
                         await DisplayAlert("Éxito", "Invernadero registrado correctamente.", "OK");
+                        if (Application.Current.MainPage is Shell shell)
+                        {
+                            var vmMenu = shell.CurrentItem?.BindingContext as VMMenuView;
+
+
+                            MessagingCenter.Send(this, "RecargarInvernaderos");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Shell no se ha inicializado correctamente.");
+                        }
+
                         await BackToMenu();
                     }
                     else
@@ -258,6 +231,7 @@ namespace SmartGreen.ViewModel
                         string errorMsg = await respuesta.Content.ReadAsStringAsync();
                         Console.WriteLine($"Error en la respuesta: {respuesta.StatusCode}, {errorMsg}");
                         await DisplayAlert("Error", $"No se pudo registrar el invernadero. Error: {respuesta.StatusCode}", "OK");
+                    
                     }
                 }
             }

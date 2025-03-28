@@ -23,6 +23,11 @@ namespace SmartGreen.ViewModel
 
             Invernaderos = new ObservableCollection<ModelViveros>();
             _ = CargarDatosAsync();
+            MessagingCenter.Subscribe<object>(this, "RecargarInvernaderos", async (sender) =>
+            {
+                // Llamamos a la función que recarga los invernaderos
+                await FindInvernaderos();
+            });
         }
 
 
@@ -219,8 +224,8 @@ namespace SmartGreen.ViewModel
             {
                 try
                 {
-                    string url = $"https://934vm7pw-5062.usw3.devtunnels.ms/api/Invernadero/FindByEmail/{correo}";
-                    //string url = $"http://192.168.1.11:5062/api/Invernadero/FindByEmail/{correo}";
+                    //string url = $"https://934vm7pw-5062.usw3.devtunnels.ms/api/Invernadero/FindByEmail/{correo}";
+                    string url = $"https://h387mpbd-5062.usw3.devtunnels.ms/api/Invernadero/FindByEmail/{correo}";
                     var respuesta = await cliente.GetAsync(url);
 
                     string json = await respuesta.Content.ReadAsStringAsync();

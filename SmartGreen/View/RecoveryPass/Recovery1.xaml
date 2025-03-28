@@ -31,16 +31,16 @@
             </Grid>
 
             <!-- Botones -->
-            <Grid Grid.Row="4" Margin="100,0,100,30">
-                <Button Text="Enviar correo" BackgroundColor="#508029" TextColor="White" HeightRequest="40"
+            <Grid Grid.Row="4" Margin="100,0,100,40">
+                <Button Text="Enviar correo" BackgroundColor="#508029" TextColor="White" HeightRequest="45"
                         Command="{Binding ToRecov2}"
-                    CornerRadius="25" HorizontalOptions="FillAndExpand" FontSize="16" FontAttributes="Bold"/>
+                    CornerRadius="25" HorizontalOptions="FillAndExpand" FontSize="18" FontAttributes="Bold"/>
             </Grid>
 
-            <Grid Grid.Row="5" Margin="100,70,100,0">
-                <Button Text="Cancelar" BackgroundColor="#b2b0a8" TextColor="White" HeightRequest="40"
+            <Grid Grid.Row="5" Margin="100,80,100,0">
+                <Button Text="Cancelar" BackgroundColor="#b2b0a8" TextColor="White" HeightRequest="45"
                         Command="{Binding ReturnLogIn}"
-                    CornerRadius="25" HorizontalOptions="FillAndExpand" FontSize="16" FontAttributes="Bold" />
+                    CornerRadius="25" HorizontalOptions="FillAndExpand" FontSize="18" FontAttributes="Bold" />
             </Grid>
         </Grid>
     </VerticalStackLayout>

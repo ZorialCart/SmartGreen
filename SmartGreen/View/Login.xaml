@@ -42,15 +42,15 @@
 
         <!-- Botones -->
         <Grid Grid.Row="4" Margin="100,-25,100,0">
-                <Button Text="Iniciar sesión" BackgroundColor="#508029" TextColor="White" HeightRequest="40"
+                <Button Text="Iniciar sesión" BackgroundColor="#508029" TextColor="White" HeightRequest="45"
                   Command="{Binding LoginCommand}"
-                    CornerRadius="25" HorizontalOptions="FillAndExpand" FontSize="16" FontAttributes="Bold" />
+                    CornerRadius="25" HorizontalOptions="FillAndExpand" FontSize="18" FontAttributes="Bold" />
         </Grid>
 
         <Grid Grid.Row="5" Margin="100,90,100,0">
-                <Button Text="Crear una cuenta" BackgroundColor="#777965" TextColor="White" HeightRequest="40"
+                <Button Text="Crear una cuenta" BackgroundColor="#777965" TextColor="White" HeightRequest="45"
                         Command="{Binding ToSingUp}"
-                    CornerRadius="25" HorizontalOptions="FillAndExpand" FontSize="16" FontAttributes="Bold" />
+                    CornerRadius="25" HorizontalOptions="FillAndExpand" FontSize="18" FontAttributes="Bold" />
         </Grid>
 
         <Grid Grid.Row="6">
