@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Class="SmartGreen.PopUpHumedad"
+    VerticalOptions="End"
+    >
+
+    <Frame x:Name="SheetContent"
+           BackgroundColor="White"
+           Padding="20"
+           CornerRadius="20"
+           HeightRequest="450"
+           VerticalOptions="End"
+           TranslationY="400"
+           WidthRequest="340">
+        <!--HorizontalOptions="CenterAndExpand"-->
+
+        <Grid x:Name="Overlay" BackgroundColor="Black" Opacity="1" >
+            <!--<Grid.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="CloseSheet"/>
+                </Grid.GestureRecognizers>-->
+
+            <VerticalStackLayout  BackgroundColor="White">
+                <Label Text="Parametros del Invernadero" FontSize="20" HorizontalOptions="Center"
+                   FontAttributes="Bold" FontFamily="bol" Padding="0,10,0,20"/>
+                <!--<Image Source="humedad.png" HeightRequest="110" WidthRequest="340" HorizontalOptions="Center" Margin="0,15,0,15"/>-->
+                <Label x:Name="HumidityLabel" Text="{Binding maxHumedad, StringFormat='Maxima Humedad {0}%'}" FontSize="18" HorizontalOptions="Center"
+                   FontAttributes="Bold" />
+                <Slider x:Name="HumiditySlider" Minimum="0" Maximum="100" Value="{Binding maxHumedad}"
+                     Margin="0,15,0,15"/>
+                <Label x:Name="HumidityLabel2" Text="{Binding minHumedad, StringFormat='Minima Humedad {0}%'}" FontSize="18" HorizontalOptions="Center"
+                    FontAttributes="Bold" />
+                <Slider x:Name="HumiditySlider2" Minimum="0" Maximum="{Binding maxHumedad}" Value="{Binding minHumedad}"
+                     Margin="0,15,0,15"/>
+                <Label x:Name="HumidityLabel3" Text="{Binding maxTemperatura, StringFormat='Maxima Temperatura {0}°'}" FontSize="18" HorizontalOptions="Center"
+                   FontAttributes="Bold" />
+                <Slider x:Name="HumiditySlider3" Minimum="15" Maximum="40" Value="{Binding maxTemperatura}"
+                     Margin="0,15,0,15"/>
+                <Label x:Name="HumidityLabel4" Text="{Binding minTemperatura, StringFormat='Minima Temperatura {0}°'}" FontSize="18" HorizontalOptions="Center"
+                    FontAttributes="Bold" />
+                <Slider x:Name="HumiditySlider4" Minimum="15" Maximum="{Binding maxTemperatura}" Value="{Binding minTemperatura}"
+                     Margin="0,15,0,15"/>                
+                
+                <Button Text="Guardar" Clicked="CloseSheet" CornerRadius="25" 
+                        FontSize="20" BackgroundColor="#88ACC7" HeightRequest="50" FontFamily="bold"
+                        Margin="50,0,50,0"/>
+            </VerticalStackLayout>
+        </Grid>
+    </Frame>
+</ContentView>

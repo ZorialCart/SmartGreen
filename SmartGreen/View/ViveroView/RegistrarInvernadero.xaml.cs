@@ -10,6 +10,6 @@ public partial class RegistrarInvernadero : ContentPage
 
 		VMRegistrarInvernaderos vMRegistrarInvernaderos = new VMRegistrarInvernaderos();
         BindingContext = vMRegistrarInvernaderos;
-
     }
+ 
 }

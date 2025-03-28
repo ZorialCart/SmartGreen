@@ -6,8 +6,9 @@ public partial class MenuView : ContentPage
 	public MenuView()
 	{
 		InitializeComponent();
-        VMMenuView vMMenuView = new VMMenuView(Navigation);
-        BindingContext = vMMenuView;
+        // VMMenuView vMMenuView = new VMMenuView();
+        // BindingContext = vMMenuView;
+        BindingContext = new VMMenuView();
 
     }
 
@@ -26,5 +27,16 @@ public partial class MenuView : ContentPage
 
 
     }
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
 
+        // Aquí puedes llamar a la función que recarga los datos de los invernaderos
+        var vmMenu = BindingContext as VMMenuView;
+
+        if (vmMenu != null)
+        {
+            await vmMenu.FindInvernaderos(); // Llamamos al método para cargar los invernaderos
+        }
+    }
 }

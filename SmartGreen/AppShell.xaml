@@ -12,10 +12,9 @@
     Shell.NavBarIsVisible="True"  
     Title="SmartGreen"
     >
-
     <Shell.FlyoutHeader>
-        <StackLayout Padding="10" BackgroundColor="#b2b0a8" >
-            <Label Text="Bienvenido a SmartGreen" FontSize="24"/>
+        <StackLayout >
+            <Image Source="logooff.png" />
         </StackLayout>
     </Shell.FlyoutHeader>
 
@@ -27,12 +26,15 @@
         <ShellContent ContentTemplate="{DataTemplate menu:MenuView}" />
     </ShellItem>
 
-    <ShellContent Title="Registrar invernadero" Icon="add.png"/>
-    <ShellContent Title="Notificaciones" Icon="notify.png"/>
-    <ShellContent Title="Estadísticas" Icon="grafico.png"/>
 
+    <!--<ShellContent Title="Notificaciones" Icon="notify.png"/>
+    <ShellContent Title="Estadísticas" Icon="grafico.png"/>-->
     
-    <ShellContent Title="Cuenta" Icon="cuenta.png"/>
+    <!--<ShellContent Title="Cuenta" Icon="cuenta.png"/>-->
+
+    <ShellItem Title="Notificaciones" Icon="monitoreo.png">
+        <ShellContent ContentTemplate="{DataTemplate view:Notificaciones}"/>
+    </ShellItem>
 
     <MenuItem Text="Salir" Command="{Binding LogOutCommand}" IconImageSource="salida.png"/>
 

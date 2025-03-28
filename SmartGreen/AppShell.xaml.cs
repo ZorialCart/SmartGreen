@@ -10,6 +10,7 @@ namespace SmartGreen
         {
             InitializeComponent();
 
+
             VMLogin vMLogin = new VMLogin();
             BindingContext = vMLogin;
 
@@ -19,19 +20,22 @@ namespace SmartGreen
             Routing.RegisterRoute("Register", typeof(Register));
             Routing.RegisterRoute("Recovery1", typeof (Recovery1));
             Routing.RegisterRoute("Recovery2", typeof(Recovery2));
-
+            Routing.RegisterRoute("RegistrarInvernadero", typeof(RegistrarInvernadero));
+            Routing.RegisterRoute("GreenHouse",typeof(GreenHouseView));
 
             if(!UserIsLoggedIn())
             {
                 GoToAsync("Login", true);
-            }
 
+            }
+            
         }
 
-        protected bool UserIsLoggedIn()
+       protected bool UserIsLoggedIn()
         {
             var vm = (VMLogin)BindingContext;
             return vm.IsLoggedIn;
         }
     }
 }
+
