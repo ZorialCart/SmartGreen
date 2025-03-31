@@ -17,7 +17,7 @@ namespace SmartGreen.Services
         public SignalRService()
         {
             _hubconnection = new HubConnectionBuilder()
-                .WithUrl("http://192.168.1.11:5062/inverStatusHub") // Cambia la URL según sea necesario
+                .WithUrl("https://5r1v7n94-5062.usw3.devtunnels.ms/inverStatusHub") // Cambia la URL según sea necesario
                 .WithAutomaticReconnect()
                 .Build();
         }

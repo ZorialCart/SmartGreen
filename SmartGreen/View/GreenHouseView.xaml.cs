@@ -15,6 +15,8 @@ public partial class GreenHouseView : ContentPage
 
     private bool _isBindingSet = false;
 
+    VMGreenHouseView VMGreenHouseview; 
+
     public GreenHouseView()
     {
         InitializeComponent();
@@ -26,11 +28,21 @@ public partial class GreenHouseView : ContentPage
 
         if (!_isBindingSet)
         {
-            var VMGreenHouseView = new VMGreenHouseView(IdInvernadero, NombreInvernadero, Started);
-            BindingContext = VMGreenHouseView;
+            VMGreenHouseview = new VMGreenHouseView(IdInvernadero, NombreInvernadero, Started);
+            BindingContext = VMGreenHouseview;
             _isBindingSet = true;
 
-            await VMGreenHouseView.InitializeAsync();
+            await VMGreenHouseview.InitializeAsync();
+            (BindingContext as VMGreenHouseView)?.Initialize();
+        }
+    }
+
+    protected override async void OnDisappearing()
+    {
+        base.OnDisappearing();
+        if (VMGreenHouseview != null)
+        {
+            await VMGreenHouseview.DisconnectAsyncSignalR();
         }
     }
 
