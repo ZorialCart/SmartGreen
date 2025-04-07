@@ -67,13 +67,36 @@ namespace SmartGreen.Clases
         }
 
         public static async Task<string?> GetUserEmailAsync()
-    {
-        var correo = await SecureStorage.GetAsync("correo");
-        if (!string.IsNullOrWhiteSpace(correo))
         {
-            return correo;
+            var correo = await SecureStorage.GetAsync("correo");
+            if (!string.IsNullOrWhiteSpace(correo))
+            {
+                return correo;
+            }
+            return null;
         }
-        return null;
-    }
+
+        public static async Task<string> SaveCodeAsync(string code)
+        {
+            try
+            {
+                await SecureStorage.SetAsync("code", code);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al guardar el código: " + ex.Message);
+            }
+            return null;
+        }
+
+        public static async Task<string> GetCodeAsync()
+        {
+            var code = await SecureStorage.GetAsync("code");
+            if (!string.IsNullOrWhiteSpace(code))
+            {
+                return code;
+            }
+            return null;
+        }
     }
 }

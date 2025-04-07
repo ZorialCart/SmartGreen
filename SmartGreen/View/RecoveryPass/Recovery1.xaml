@@ -27,18 +27,19 @@
 
             <!-- Campos de entrada -->
             <Grid Grid.Row="2" Margin="30,-40,30,0">
-                <Entry Placeholder="Correo" HeightRequest="40" FontSize="18" TextColor="Black" Keyboard="Email" PlaceholderColor="Gray"/>
+                <Entry Text="{Binding Correo}" Placeholder="Correo" HeightRequest="40" FontSize="18" TextColor="Black" Keyboard="Email" PlaceholderColor="Gray"/>
             </Grid>
 
             <!-- Botones -->
-            <Grid Grid.Row="4" Margin="100,0,100,40">
-                <Button Text="Enviar correo" BackgroundColor="#508029" TextColor="White" HeightRequest="45"
+            <Grid Grid.Row="4" Margin="110,0,110,40">
+                <Button Text="Enviar correo" BackgroundColor="#508029" TextColor="White" HeightRequest="42"
                         Command="{Binding ToRecov2}"
                     CornerRadius="25" HorizontalOptions="FillAndExpand" FontSize="18" FontAttributes="Bold"/>
+                <Label Text="{Binding MsgCorreo}" TextColor="red" FontSize="Small" Margin="-62,-3,30,0"/>
             </Grid>
 
-            <Grid Grid.Row="5" Margin="100,80,100,0">
-                <Button Text="Cancelar" BackgroundColor="#b2b0a8" TextColor="White" HeightRequest="45"
+            <Grid Grid.Row="5" Margin="110,90,110,0">
+                <Button Text="Cancelar" BackgroundColor="#b2b0a8" TextColor="White" HeightRequest="42"
                         Command="{Binding ReturnLogIn}"
                     CornerRadius="25" HorizontalOptions="FillAndExpand" FontSize="18" FontAttributes="Bold" />
             </Grid>

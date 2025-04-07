@@ -41,20 +41,20 @@
             </Grid>
 
         <!-- Botones -->
-        <Grid Grid.Row="4" Margin="100,-25,100,0">
-                <Button Text="Iniciar sesión" BackgroundColor="#508029" TextColor="White" HeightRequest="45"
+        <Grid Grid.Row="4" Margin="110,-25,110,0">
+                <Button Text="Iniciar sesión" BackgroundColor="#508029" TextColor="White" HeightRequest="42"
                   Command="{Binding LoginCommand}"
                     CornerRadius="25" HorizontalOptions="FillAndExpand" FontSize="18" FontAttributes="Bold" />
         </Grid>
 
-        <Grid Grid.Row="5" Margin="100,90,100,0">
-                <Button Text="Crear una cuenta" BackgroundColor="#777965" TextColor="White" HeightRequest="45"
+        <Grid Grid.Row="5" Margin="110,90,110,0">
+                <Button Text="Crear una cuenta" BackgroundColor="#777965" TextColor="White" HeightRequest="42"
                         Command="{Binding ToSingUp}"
                     CornerRadius="25" HorizontalOptions="FillAndExpand" FontSize="18" FontAttributes="Bold" />
         </Grid>
 
         <Grid Grid.Row="6">
-            <Label Text="¿Olvidaste tu contraseña?" TextColor="Black" FontSize="12"
+            <Label Text="¿Olvidaste tu contraseña?" TextColor="Black" FontSize="Small"
                    HorizontalOptions="Center" TextDecorations="Underline" Margin="0,180,0,0">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ToRecovery}"/>

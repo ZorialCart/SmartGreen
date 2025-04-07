@@ -27,17 +27,19 @@
             </Grid>
 
             <!-- Campos de entrada -->
-            <Grid Grid.Row="2" Margin="30,-40,30,0">
-                <Entry Placeholder="Nueva contraseña" HeightRequest="40" FontSize="18" TextColor="Black" IsPassword="True" PlaceholderColor="Gray"/>
+            <Grid Grid.Row="2" Margin="30,-50,30,0">
+                <Entry Text="{Binding NewPass}" Placeholder="Nueva contraseña" HeightRequest="40" FontSize="18" TextColor="Black" IsPassword="True" PlaceholderColor="Gray"/>
+                <Label Text="{Binding MsgPass}" TextColor="red" FontSize="Small" Margin="10,40,0,0"/>
             </Grid>
             <Grid Grid.Row="3" Margin="30,-50,30,0">
-                <Entry Placeholder="Confirmar nueva contraseña" HeightRequest="40" FontSize="18" TextColor="Black" IsPassword="True" PlaceholderColor="Gray"/>
+                <Entry Text="{Binding ConfirmPass}"   Placeholder="Confirmar nueva contraseña" HeightRequest="40" FontSize="18" TextColor="Black" IsPassword="True" PlaceholderColor="Gray"/>
+                <Label Text="{Binding MsgConfirmPass}" TextColor="red" FontSize="Small" Margin="10,95,0,0"/>
             </Grid>
 
             <!-- Botones -->
-            <Grid Grid.Row="4" Margin="100,70,100,0">
-                <Button Text="Confirmar" BackgroundColor="#508029" TextColor="White" HeightRequest="44"
-                    CornerRadius="25" HorizontalOptions="FillAndExpand" FontSize="18" FontAttributes="Bold" />
+            <Grid Grid.Row="4" Margin="120,70,120,0">
+                <Button Text="Confirmar" BackgroundColor="#508029" TextColor="White" HeightRequest="42"
+                    CornerRadius="25" HorizontalOptions="FillAndExpand" FontSize="18" FontAttributes="Bold" Command="{Binding Change}"/>
             </Grid>
         </Grid>
     </VerticalStackLayout>
