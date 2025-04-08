@@ -207,8 +207,8 @@ namespace SmartGreen.ViewModel
                     string json = JsonConvert.SerializeObject(inverModel);
                     var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                    //var respuesta = await client.PatchAsync($"https://934vm7pw-5062.usw3.devtunnels.ms/api/Invernadero/RegistrarInvernadero", content);
-                    var respuesta = await client.PatchAsync($"https://h387mpbd-5062.usw3.devtunnels.ms/api/Invernadero/RegistrarInvernadero", content);
+                    var respuesta = await client.PatchAsync($"https://934vm7pw-5062.usw3.devtunnels.ms/api/Invernadero/RegistrarInvernadero", content);
+                    //var respuesta = await client.PatchAsync($"https://h387mpbd-5062.usw3.devtunnels.ms/api/Invernadero/RegistrarInvernadero", content);
                     if (respuesta.IsSuccessStatusCode)
                     {
                         await DisplayAlert("Éxito", "Invernadero registrado correctamente.", "OK");
