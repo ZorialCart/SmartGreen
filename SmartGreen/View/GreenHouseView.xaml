@@ -53,10 +53,6 @@
                            />
                 </Frame>
 
-                <!-- Marco circular (indicador de porcentaje) 
-                <GraphicsView
-                Drawable="{Binding CircularProgressDrawable}" />-->
-
                 <Label
                     Text="{Binding Humedad, StringFormat='Humedad actual: {0}%'}" FontAttributes="Bold" FontFamily="bold"
                     FontSize="20"
@@ -96,7 +92,8 @@
                         <Switch IsToggled="{Binding Started}"
                                 Toggled="OnSwitchToggled"
                                 HorizontalOptions="Center"
-                                Scale="2" />
+                                Scale="2" 
+                                />
                     </StackLayout>
                 </Frame>
 

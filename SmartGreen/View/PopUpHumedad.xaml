@@ -11,18 +11,18 @@
            BackgroundColor="White"
            Padding="20"
            CornerRadius="20"
-           HeightRequest="450"
+           HeightRequest="500"
            VerticalOptions="End"
            TranslationY="400"
            WidthRequest="340">
         <!--HorizontalOptions="CenterAndExpand"-->
 
-        <Grid x:Name="Overlay" BackgroundColor="Black" Opacity="1" >
+        <Grid x:Name="Overlay" BackgroundColor="Black" Opacity="1">
             <!--<Grid.GestureRecognizers>
                     <TapGestureRecognizer Tapped="CloseSheet"/>
                 </Grid.GestureRecognizers>-->
 
-            <VerticalStackLayout  BackgroundColor="White">
+            <VerticalStackLayout Grid.ColumnSpan="2" BackgroundColor="White">
                 <Label Text="Parametros del Invernadero" FontSize="20" HorizontalOptions="Center"
                    FontAttributes="Bold" FontFamily="bol" Padding="0,10,0,20"/>
                 <!--<Image Source="humedad.png" HeightRequest="110" WidthRequest="340" HorizontalOptions="Center" Margin="0,15,0,15"/>-->
@@ -41,11 +41,20 @@
                 <Label x:Name="HumidityLabel4" Text="{Binding minTemperatura, StringFormat='Minima Temperatura {0}°'}" FontSize="18" HorizontalOptions="Center"
                     FontAttributes="Bold" />
                 <Slider x:Name="HumiditySlider4" Minimum="15" Maximum="{Binding maxTemperatura}" Value="{Binding minTemperatura}"
-                     Margin="0,15,0,15"/>                
-                
-                <Button Text="Guardar" Clicked="CloseSheet" CornerRadius="25" 
+                     Margin="0,15,0,15"/>
+
+                <Grid ColumnDefinitions="*,*" RowDefinitions="*" HorizontalOptions="Center">
+
+                    <Button Text="Guardar" Clicked="CloseSheet" Command="{Binding ChangeInverStatusCommand}" CornerRadius="25" 
                         FontSize="20" BackgroundColor="#88ACC7" HeightRequest="50" FontFamily="bold"
-                        Margin="50,0,50,0"/>
+                        Margin="0,0,0,0"
+                        Grid.Column="0"
+                        />
+                    <Button Text="Cancelar" TextColor="White" Clicked="CloseSheet" CornerRadius="25" 
+                        FontSize="20" BackgroundColor="#CDCDCD" HeightRequest="50" FontFamily="bold"
+                        Margin="30,0,0,0"
+                            Grid.Column="1"/>
+                </Grid>    
             </VerticalStackLayout>
         </Grid>
     </Frame>

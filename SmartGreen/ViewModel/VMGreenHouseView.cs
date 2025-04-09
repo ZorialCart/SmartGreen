@@ -14,7 +14,9 @@ namespace SmartGreen.ViewModel
 {
     public class VMGreenHouseView : BaseViewModel
     {
-        public InvernaderoModel invernadero;
+        private bool _isInitialized = false;
+        bool actualState;
+        private InvernaderoModel invernadero;
         private bool _started;
         private string _estadoFlujo;
         private double _humedad;
@@ -25,6 +27,7 @@ namespace SmartGreen.ViewModel
         private int _maxhumedad;
         private int _mintemperatura;
         private int _maxtemperatura;
+        private ChangeInverStatusModel actualInverParameters;
         public string HumedadPorcentaje { get; set; } // Ejemplo del porcentaje
         public IDrawable CircularProgressDrawable { get; set; } = new CircularProgressDrawable(1f);
         private readonly InverStatusModel _invernadero;
@@ -36,7 +39,14 @@ namespace SmartGreen.ViewModel
             _idInvernadero = id;
             NombreInvernadero = inverNombre;
             EstadoFlujo = started ? "Apagar riego" : "Iniciar riego";
-            Started = started;
+            _started = started;
+            actualState = started;
+        }
+
+        public InvernaderoModel Invernadero
+        {
+            get => invernadero;
+            set { SetValue(ref invernadero, value); }
         }
 
         public int minHumedad
@@ -73,7 +83,12 @@ namespace SmartGreen.ViewModel
         public bool Started
         {
             get => _started;
-            set { SetValue(ref _started, value); }
+            set {
+                if (_isInitialized) // Solo ejecuta si la vista ya cargó
+                {
+                    _ = TurnOnOrTurnOfInvernadero();
+                }
+                SetValue(ref _started, value); }
         }
 
         public double Humedad
@@ -99,12 +114,48 @@ namespace SmartGreen.ViewModel
             //await Navigation.PopAsync();
         }
 
+        public async Task TurnOnOrTurnOfInvernadero()
+        {
+            bool newvalue = !_started;
+            string url = $"https://5r1v7n94-5062.usw3.devtunnels.ms/api/Invernadero/ToggleStatus/{_idInvernadero}";
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    var response = await client.PatchAsync(url, null);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        _started = newvalue;
+                    }
+                    else
+                    {
+                        _started = actualState;
+                        if (Started)
+                        {
+                            await DisplayAlert("Error", $"No se pudo detener el riego. Error: {response.StatusCode}", "OK");
+                        }
+                        else
+                        {
+                            await DisplayAlert("Error", $"No se pudo iniciar el riego. Error: {response.StatusCode}", "OK");
+                        }
+                        
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _started = actualState;
+                await DisplayAlert("Error", $"No se pudo acceder al servicio. Error: {ex.Message}", "OK");
+            }
+
+        }
+
         public async Task GetInverAtributes()
         {
             using (var cliente = new HttpClient())
             {
-                string url = $"https://934vm7pw-5062.usw3.devtunnels.ms/api/Invernadero/Find/{_idInvernadero}";
-                //string url = $"192.168.1.11:5062/api/Invernadero/Find/{_idInvernadero}";
+                //string url = $"https://934vm7pw-5062.usw3.devtunnels.ms/api/Invernadero/Find/{_idInvernadero}";
+                string url = $"https://5r1v7n94-5062.usw3.devtunnels.ms/api/Invernadero/Find/{_idInvernadero}";
                 try
                 {
                     var result = await cliente.GetAsync(url);
@@ -120,10 +171,18 @@ namespace SmartGreen.ViewModel
                         if (inver != null)
                         {
                             invernadero = inver;
-                            maxHumedad = invernadero.maxHumedad;
-                            minHumedad = invernadero.minHumedad;
-                            maxTemperatura = invernadero.maxTemperatura;
-                            minTemperatura = invernadero.minTemperatura;
+                            maxHumedad = Invernadero.maxHumedad;
+                            minHumedad = Invernadero.minHumedad;
+                            maxTemperatura = Invernadero.maxTemperatura;
+                            minTemperatura = Invernadero.minTemperatura;
+                            actualInverParameters = new ChangeInverStatusModel
+                            {
+                                idInvernadero = inver.idInvernadero,
+                                MaxHumedad = inver.maxHumedad,
+                                MinHumedad = inver.minHumedad,
+                                MaxTemperatura = inver.maxTemperatura,
+                                MinTemperatura = inver.minTemperatura
+                            };
                         }
                     }
                     else
@@ -139,10 +198,55 @@ namespace SmartGreen.ViewModel
             }
         }
 
+        public async Task ChangeInverStatus() 
+        {
+            ChangeInverStatusModel newParameters = new ChangeInverStatusModel
+            {
+                idInvernadero = _idInvernadero,
+                MaxHumedad = maxHumedad,
+                MinHumedad = minHumedad,
+                MaxTemperatura = maxTemperatura,
+                MinTemperatura = minTemperatura
+            };
+            string url = "https://5r1v7n94-5062.usw3.devtunnels.ms/api/Invernadero/ChangeInverParameters";
+
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    string json = JsonSerializer.Serialize(newParameters);
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+                    var response = await client.PatchAsync(url, content);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        await DisplayAlert("Éxito", "Se establecieron los nuevos parámetros.", "OK");
+                    }
+                    else
+                    {
+                        if (actualInverParameters != null) 
+                        {
+                            maxHumedad = actualInverParameters.MaxHumedad;
+                            minHumedad = actualInverParameters.MinHumedad;
+                            maxTemperatura = actualInverParameters.MaxTemperatura;
+                            minTemperatura = actualInverParameters.MinTemperatura;
+                        }
+                        
+                        string error = await response.Content.ReadAsStringAsync();
+                        await DisplayAlert("Error", $"No se pudieron actualizar los parámetros. Error: {response.StatusCode}", "OK");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", $"Algo salió mal. Error: {ex.Message}", "OK");
+            }
+
+        }
+
         public async Task GetLastStatus()
         {
-            string url = $"https://934vm7pw-5062.usw3.devtunnels.ms/GetLastStatus/{_idInvernadero}";
-            //string url = $"http://192.168.1.11:5062/GetLastStatus/{_idInvernadero}";
+            //string url = $"https://934vm7pw-5062.usw3.devtunnels.ms/GetLastStatus/{_idInvernadero}";
+            string url = $"https://5r1v7n94-5062.usw3.devtunnels.ms/GetLastStatus/{_idInvernadero}";
 
             try
             {
@@ -179,17 +283,18 @@ namespace SmartGreen.ViewModel
                 Console.WriteLine("Error en la conexión: " + ex.Message);
             }
         }
-        public void Toggled(bool newvalue)
+        public async void Toggled(bool newvalue)
         {
-            Started = newvalue;
-            if (Started)
-            {
-                EstadoFlujo = "Apagar riego";
-                return;
-            }
-            EstadoFlujo = "Iniciar riego";
+            if (!_isInitialized) return;
+            _started = newvalue;
+            //await TurnOnOrTurnOfInvernadero();
+            EstadoFlujo = _started ? "Apagar riego" : "Iniciar riego";
         }
 
+        public void Initialize()
+        {
+            _isInitialized = true; // Activa la ejecución solo después de la carga
+        }
 
         public async Task InitStatus()
         {
@@ -212,6 +317,12 @@ namespace SmartGreen.ViewModel
         {
             await GetLastStatus();
             await InitStatus();
+            await GetInverAtributes();
+        }
+
+        public async Task DisconnectAsyncSignalR()
+        {
+            await _signalRService.DisconnectAsync();
         }
         //public void TurnOnWaterFlow()
         //{
@@ -225,6 +336,7 @@ namespace SmartGreen.ViewModel
 
         public ICommand ToggledCommand => new Command<bool>(Toggled);
         public ICommand VolverCommand => new Command(async () => await Volver());
+        public ICommand ChangeInverStatusCommand => new Command(async () => await ChangeInverStatus());
         //public ICommand EncenderFlujoCommand => new Command(TurnOnWaterFlow);
     }
 }
